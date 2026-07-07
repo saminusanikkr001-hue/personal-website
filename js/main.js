@@ -37,23 +37,32 @@
     document.getElementById('mainNav').classList.toggle('open');
   };
 
-  window.openArticle = function(title){
-    var meta = ARTICLES_WITH_BODY[title];
+  // 用索引代替把标题直接塞进onclick属性——标题里含引号会把内联onclick的HTML写乱，点击完全没反应
+  var ALL_ROWS = [];
+  COLLECTIONS.forEach(function(c){
+    (ARTICLE_TITLES[c.key]||[]).forEach(function(t){
+      ALL_ROWS.push({title:t, coll:c.name, key:c.key});
+    });
+  });
+
+  window.openArticleByIndex = function(idx){
+    var row = ALL_ROWS[idx];
+    if(!row) return;
+    var meta = ARTICLES_WITH_BODY[row.title];
     var body = meta ? '<p>正文已收录，完整内容见站点原文归档。</p>' : '<p style="color:var(--sub)">内容整理中，稍后补上正文。</p>';
-    var collName = '';
-    COLLECTIONS.forEach(function(c){ if(meta && c.key===meta.collection) collName = c.name; });
     document.getElementById('article-slot').innerHTML =
       '<button class="back" onclick="showView(\'jinglun\')">← 返回</button>'+
-      '<div class="art-meta">'+(meta ? meta.date : '') + (collName ? ' · '+collName : '')+'</div>'+
-      '<h1 class="art-title">'+title+'</h1>'+
+      '<div class="art-meta">'+(meta ? meta.date : '') + ' · '+row.coll+'</div>'+
+      '<h1 class="art-title">'+row.title+'</h1>'+
       '<div class="art-body">'+body+'</div>';
     showView('article');
   };
 
   // 首页：最近几篇（取自清醒纪最新3篇）
-  var recent = ['所谓命运，不过是价值观的自动化结算','什么决定你的自我驱动力','这个世界是有生命的：一场名为"自证预言"的漫长回音'];
-  document.getElementById('home-articles').innerHTML = recent.map(function(t,i){
-    return '<div class="glass card" onclick="openArticle('+JSON.stringify(t)+')"><div class="idx">0'+(i+1)+'</div><h3>'+t+'</h3></div>';
+  var recentTitles = ['所谓命运，不过是价值观的自动化结算','什么决定你的自我驱动力','这个世界是有生命的：一场名为"自证预言"的漫长回音'];
+  document.getElementById('home-articles').innerHTML = recentTitles.map(function(t,i){
+    var idx = ALL_ROWS.findIndex(function(r){ return r.title === t; });
+    return '<div class="glass card" onclick="openArticleByIndex('+idx+')"><div class="idx">0'+(i+1)+'</div><h3>'+t+'</h3></div>';
   }).join('');
 
   // 静论页：合集卡片
@@ -63,14 +72,8 @@
   }).join('');
 
   // 静论页：全部文章表格
-  var allRows = [];
-  COLLECTIONS.forEach(function(c){
-    (ARTICLE_TITLES[c.key]||[]).forEach(function(t){
-      allRows.push({title:t, coll:c.name});
-    });
-  });
-  document.getElementById('article-table').innerHTML = allRows.map(function(r){
-    return '<div class="grow" style="cursor:pointer" onclick="openArticle('+JSON.stringify(r.title)+')"><span style="font-weight:600;font-size:13px">'+r.title+'</span><span class="gtag">'+r.coll+'</span></div>';
+  document.getElementById('article-table').innerHTML = ALL_ROWS.map(function(r,idx){
+    return '<div class="grow" style="cursor:pointer" onclick="openArticleByIndex('+idx+')"><span style="font-weight:600;font-size:13px">'+r.title+'</span><span class="gtag">'+r.coll+'</span></div>';
   }).join('');
 
   // 月报页
