@@ -118,7 +118,199 @@
     '<div class="es3">暂无数据 · 稍后再来看看</div>'
   ]};
 
+  // ---- 合集切换标签 / 合集封面卡片 ----
+  DATA.collectiontabs = {variants:[
+    '<div style="display:flex;gap:8px"><span class="gtag on">全部<sup>14</sup></span><span class="gtag">Master Plan<sup>3</sup></span><span class="gtag">访谈<sup>2</sup></span></div>',
+    '<div class="glass" style="display:inline-flex;padding:5px;gap:2px;border-radius:999px"><span class="gtag on" style="border-radius:999px">全部</span><span class="gtag" style="background:none;border:none">Master Plan</span><span class="gtag" style="background:none;border:none">访谈</span></div>',
+    '<div style="display:flex;gap:20px;border-bottom:1px solid var(--line)"><span style="padding-bottom:8px;border-bottom:2px solid var(--i2);font-size:13px;font-weight:700">全部</span><span style="padding-bottom:8px;font-size:13px;color:var(--sub)">Master Plan</span><span style="padding-bottom:8px;font-size:13px;color:var(--sub)">访谈</span></div>'
+  ]};
+  DATA.collectioncover = {variants:[
+    '<div class="cardgrid"><div class="glass" style="overflow:hidden;padding:0"><div style="height:80px;background:linear-gradient(135deg,var(--i1),var(--i3))"></div><div class="gcard"><h4 style="margin:0;font-size:14px;font-weight:800">Master Plan 合集</h4><p style="font-size:11px;color:var(--sub);margin:4px 0 0">3篇</p></div></div></div>',
+    '<div class="glass gcard" style="display:flex;gap:14px;align-items:center"><div style="width:50px;height:66px;border-radius:6px;background:linear-gradient(180deg,var(--i2),var(--i4));flex-shrink:0"></div><div><h4 style="margin:0;font-size:14px;font-weight:800">Master Plan 合集</h4><p style="font-size:11px;color:var(--sub);margin:4px 0 0">像一本书一样呈现，书脊色块+竖排信息</p></div></div>',
+    '<div class="glass gcard"><div class="gtag on">合集</div><h4 style="margin:10px 0 0;font-size:16px;font-weight:800">Master Plan</h4><p style="font-size:11.5px;color:var(--sub);margin:6px 0 0">2006-2023 · 3篇文章</p></div>'
+  ]};
+
+  // ---- 文章列表表格版 / 文章详情三件套 / 双语 / 翻页 / 分享 / 二维码 / 阅读进度条 ----
+  DATA.articletable = {variants:[
+    '<div class="glass" style="padding:6px"><div class="grow"><span style="font-weight:700;font-size:13px">The Secret Master Plan</span><span class="mono" style="font-size:11px;color:var(--sub)">2006.08</span></div><div class="grow"><span style="font-weight:700;font-size:13px">Master Plan Part Deux</span><span class="mono" style="font-size:11px;color:var(--sub)">2016.07</span></div><div class="grow"><span style="font-weight:700;font-size:13px">Master Plan Part 3</span><span class="mono" style="font-size:11px;color:var(--sub)">2023.03</span></div></div>',
+    '<div style="border-top:1px solid var(--line)"><div style="display:grid;grid-template-columns:2fr 1fr 1fr;font-size:10px;color:var(--sub);text-transform:uppercase;padding:8px 4px">标题<span>合集</span><span>日期</span></div><div class="grow" style="display:grid;grid-template-columns:2fr 1fr 1fr;padding:12px 4px"><span style="font-weight:700;font-size:13px">The Secret Master Plan</span><span class="gtag">Tesla</span><span class="mono" style="font-size:11px;color:var(--sub)">2006.08</span></div></div>'
+  ]};
+  DATA.articlemeta = {variants:[
+    '<div><div class="mono grad-text" style="font-size:12px;font-weight:700">2006.08.02 · TESLA BLOG</div><h1 style="font-size:26px;margin:10px 0 0;font-weight:800">The Secret Tesla Motors Master Plan</h1></div>',
+    '<div><h1 style="font-size:26px;margin:0 0 10px;font-weight:800">The Secret Tesla Motors Master Plan</h1><div style="display:flex;gap:14px;font-size:12px;color:var(--sub)"><span>2006.08.02</span><span>·</span><span>约1,200字</span><span>·</span><span>4分钟阅读</span></div></div>',
+    '<div class="glass gcard"><div class="gtag on">Tesla Blog</div><h1 style="font-size:22px;margin:10px 0 6px;font-weight:800">The Secret Tesla Motors Master Plan</h1><div class="mono" style="font-size:11px;color:var(--sub)">2006.08.02</div></div>'
+  ]};
+  DATA.articlebody = {variants:[
+    '<p style="font-family:ui-serif,Georgia,serif;font-size:16px;line-height:1.9;max-width:60ch;color:#2a2640">"As you know, the initial product of Tesla Motors is a high performance electric sports car..." 衬线正文，强调"这是被认真写下的内容"。</p>',
+    '<p style="font-size:15px;line-height:1.85;max-width:64ch;color:#2a2640">"As you know, the initial product of Tesla Motors is a high performance electric sports car..." 无衬线正文，行宽更宽，适合快速浏览的博客风格。</p>',
+    '<p style="font-size:17px;line-height:2.1;max-width:52ch;margin:0 auto;text-align:left;color:#2a2640">"As you know, the initial product of Tesla Motors is a high performance electric sports car..." 更窄的行宽+更大行距，强调阅读舒适度而非信息密度。</p>'
+  ]};
+  DATA.articletoc = {variants:[
+    '<div class="glass gcard" style="max-width:220px"><div style="font-size:10px;color:var(--sub);text-transform:uppercase;margin-bottom:8px">目录</div><div style="font-size:12.5px;line-height:2;color:var(--sub)"><div style="color:var(--i2);font-weight:700">01 起点</div><div>02 四步走</div><div>03 太阳能</div></div></div>',
+    '<div style="display:flex;flex-direction:column;gap:10px;border-left:2px solid var(--line);padding-left:14px;max-width:220px"><div style="font-size:12.5px;font-weight:700;color:var(--i2);border-left:2px solid var(--i2);margin-left:-16px;padding-left:14px">01 起点</div><div style="font-size:12.5px;color:var(--sub)">02 四步走</div><div style="font-size:12.5px;color:var(--sub)">03 太阳能</div></div>'
+  ]};
+  DATA.bilingual = {variants:[
+    '<div class="th3"><span class="on">中文</span><span>EN</span></div>',
+    '<span class="gtag on" style="cursor:pointer">中 / EN</span>'
+  ]};
+  DATA.articlenav = {variants:[
+    '<div style="display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px"><div><div style="font-size:10px;color:var(--sub)">← 上一篇</div><div style="font-size:13px;font-weight:700">The Secret Master Plan</div></div><div style="text-align:right"><div style="font-size:10px;color:var(--sub)">下一篇 →</div><div style="font-size:13px;font-weight:700">Part 3</div></div></div>',
+    '<div style="display:flex;gap:10px"><span class="glass gcard" style="flex:1;text-align:center;cursor:pointer">← 上一篇</span><span class="glass gcard" style="flex:1;text-align:center;cursor:pointer">下一篇 →</span></div>'
+  ]};
+  DATA.share = {variants:[
+    '<div style="display:flex;gap:8px"><span class="glass gring" style="display:flex;align-items:center;justify-content:center;cursor:pointer">X</span><span class="glass gring" style="display:flex;align-items:center;justify-content:center;cursor:pointer">微</span><span class="glass gring" style="display:flex;align-items:center;justify-content:center;cursor:pointer">🔗</span></div>',
+    '<span class="gbtn">分享这篇文章 ↗</span>',
+    '<div style="display:flex;gap:6px"><span class="gtag">分享到 X</span><span class="gtag">复制链接</span></div>'
+  ]};
+  DATA.qrcode = {variants:[
+    '<div class="glass gcard" style="display:inline-flex;gap:12px;align-items:center"><div style="width:64px;height:64px;border-radius:8px;background:repeating-conic-gradient(var(--ink) 0 25%, transparent 0 50%) 0 0/16px 16px"></div><div style="font-size:12px;color:var(--sub)">扫码关注<br/>公众号「静论」</div></div>',
+    '<div class="glass gcard" style="text-align:center;max-width:140px"><div style="width:100%;aspect-ratio:1;border-radius:8px;background:repeating-conic-gradient(var(--ink) 0 25%, transparent 0 50%) 0 0/14px 14px;margin-bottom:8px"></div><div style="font-size:11px;color:var(--sub)">关注「静论」</div></div>'
+  ]};
+  DATA.readprogress = {variants:[
+    '<div style="height:4px;background:var(--line);border-radius:99px;overflow:hidden"><div style="width:62%;height:100%;background:linear-gradient(90deg,var(--i1),var(--i3))"></div></div><div style="font-size:10px;color:var(--sub);margin-top:4px">阅读进度 62%（页面顶部细条，滚动时更新）</div>',
+    '<div style="display:flex;align-items:center;gap:8px"><div class="pv3-ring" style="width:32px;height:32px;background:conic-gradient(var(--i2) 0 62%, var(--line) 62% 100%)"><span style="width:24px;height:24px;font-size:8px">62%</span></div><span style="font-size:11px;color:var(--sub)">阅读进度（固定在角落的环形指示）</span></div>'
+  ]};
+
+  // ---- 月报三件套 ----
+  DATA.monthlylist = {variants:[
+    '<div class="glass" style="padding:6px">' + ['2026年06月刊','2026年05月刊','2026年04月刊'].map(function(m,i){return '<div class="grow"><span style="font-weight:700;font-size:13px">'+m+'</span><span class="mono" style="font-size:11px;color:var(--sub)">第'+(30-i)+'期</span></div>';}).join('') + '</div>',
+    '<div class="cardgrid">' + ['06月','05月','04月'].map(function(m){return '<div class="glass gcard" style="text-align:center"><div class="grad-text" style="font-size:22px;font-weight:800">'+m+'</div><div style="font-size:11px;color:var(--sub)">2026</div></div>';}).join('') + '</div>'
+  ]};
+  DATA.monthlytimeline = {variants:[
+    '<div style="display:flex;gap:14px;overflow-x:auto">' + ['04月','05月','06月'].map(function(m){return '<div class="glass gcard" style="flex-shrink:0;width:120px;text-align:center"><div class="grad-text" style="font-weight:800">'+m+'</div></div>';}).join('') + '</div>',
+    '<div class="glass gcard"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;color:var(--sub)">04月</span><div style="flex:1;height:2px;background:linear-gradient(90deg,var(--i1),var(--i3));margin:0 10px"></div><span style="font-size:12px;color:var(--sub)">06月</span></div><p style="font-size:11px;color:var(--sub);margin-top:10px">对比时间轴：看变化速度而非单期内容</p></div>'
+  ]};
+
+  // ---- 原则库两项 ----
+  DATA.principlefilter = {variants:[
+    '<div style="display:flex;gap:8px;flex-wrap:wrap"><span class="gtag on">全部</span><span class="gtag">决策类</span><span class="gtag">关系类</span><span class="gtag">工作类</span></div>',
+    '<select class="glass" style="border:none;padding:9px 14px;border-radius:10px;font-size:12.5px;color:var(--ink)"><option>按分类筛选：全部</option><option>决策类</option><option>关系类</option></select>'
+  ]};
+  DATA.principleexpand = {variants:[
+    '<div class="glass gcard"><div style="display:flex;justify-content:space-between"><h4 style="margin:0;font-size:14px;font-weight:800">P01 第一性原理</h4><span style="color:var(--sub)">▾</span></div><p style="font-size:12px;color:var(--sub);margin:8px 0 0">把问题拆到最基本的事实，再往上推导。点击展开查看完整案例与应用场景……</p></div>',
+    '<div class="glass gcard"><div style="display:flex;justify-content:space-between"><h4 style="margin:0;font-size:14px;font-weight:800">P01 第一性原理</h4><span style="color:var(--sub)">▸</span></div></div>'
+  ]};
+
+  // ---- 单本书详情卡 ----
+  DATA.bookdetail = {variants:[
+    '<div class="glass gcard" style="display:flex;gap:14px"><div style="width:48px;height:64px;border-radius:6px;background:linear-gradient(180deg,var(--i1),var(--i3));flex-shrink:0"></div><div><h4 style="margin:0;font-size:14px;font-weight:800">The Almanack of Naval Ravikant</h4><p style="font-size:11px;color:var(--sub);margin:6px 0 0">英文原版 · 进度62% · 2026.05开始</p></div></div>',
+    '<div class="glass gcard"><h4 style="margin:0 0 6px;font-size:14px;font-weight:800">The Almanack of Naval Ravikant</h4><div class="pv1-track"><div class="pv1-fill" style="width:62%"></div></div><p style="font-size:10.5px;color:var(--sub);margin-top:6px">62% · 英文原版</p></div>'
+  ]};
+
+  // ---- 追剧进度 / 任务同步状态 / 热力图 / 成就 ----
+  DATA.watching = {variants:[
+    '<div class="glass gcard"><h4 style="margin:0;font-size:14px;font-weight:800">老友记</h4><p style="font-size:11.5px;color:var(--sub);margin:6px 0 0">第3季 · 第14集</p></div>',
+    '<div class="grow"><span style="font-weight:700;font-size:13px">老友记</span><span class="gtag on">S3 E14</span></div>'
+  ]};
+  DATA.syncstatus = {variants:[
+    '<div class="glass gcard" style="display:flex;align-items:center;gap:10px"><span style="width:8px;height:8px;border-radius:50%;background:#22c55e"></span><span style="font-size:12px;color:var(--sub)">最后同步于 2小时前</span></div>',
+    '<div class="glass gcard" style="display:flex;align-items:center;gap:10px"><span style="width:8px;height:8px;border-radius:50%;background:#f59e0b"></span><span style="font-size:12px;color:var(--sub)">已过期3天，该更新数据了</span></div>'
+  ]};
+  DATA.heatmap = {variants:[
+    '<div style="display:grid;grid-template-columns:repeat(14,1fr);gap:3px;max-width:280px">' + Array.from({length:28}).map(function(_,i){var op=[0.15,0.35,0.6,0.9][i%4];return '<div style="aspect-ratio:1;border-radius:3px;background:var(--i2);opacity:'+op+'"></div>';}).join('') + '</div>',
+    '<div class="glass gcard"><div style="display:flex;gap:2px">' + Array.from({length:14}).map(function(_,i){var h=[8,16,24,12,30,20,10][i%7];return '<div style="width:8px;height:'+h+'px;background:linear-gradient(180deg,var(--i1),var(--i3));border-radius:2px"></div>';}).join('') + '</div><p style="font-size:10.5px;color:var(--sub);margin-top:8px">近14天执行强度</p></div>'
+  ]};
+  DATA.badges = {variants:[
+    '<div style="display:flex;gap:8px;flex-wrap:wrap"><span class="gtag on">🚀 SpaceX创始人</span><span class="gtag on">⚡ Tesla CEO</span><span class="gtag on">🧠 Neuralink</span></div>',
+    '<div class="cardgrid">' + ['SpaceX创始人','Tesla CEO','Neuralink创始人'].map(function(b){return '<div class="glass gcard" style="text-align:center;font-size:12px;font-weight:700">'+b+'</div>';}).join('') + '</div>'
+  ]};
+
+  // ---- 浏览导览 / Dispatch ----
+  DATA.explorecards = {variants:[
+    '<div class="cardgrid">' + ['Essays','Timeline','Quotes'].map(function(c,i){return '<div class="glass gcard" style="text-align:center"><div class="grad-text" style="font-size:11px;font-weight:800;margin-bottom:4px">0'+(i+1)+'</div><div style="font-weight:800;font-size:13px">'+c+'</div></div>';}).join('') + '</div>',
+    '<div style="display:flex;gap:10px;overflow-x:auto">' + ['Essays','Timeline','Quotes'].map(function(c){return '<div class="glass gcard" style="flex-shrink:0;width:110px;text-align:center;font-weight:700;font-size:12.5px">'+c+'</div>';}).join('') + '</div>'
+  ]};
+  DATA.dispatch = {variants:[
+    '<div class="glass gcard" style="display:inline-flex;align-items:center;gap:10px"><span style="width:8px;height:8px;border-radius:50%;background:#22c55e"></span><span style="font-size:12px;font-weight:600">当前：xAI · Grok 5 训练中</span></div>',
+    '<div class="glass gcard"><div style="font-size:10px;color:var(--sub);text-transform:uppercase">Now</div><div style="font-size:13px;font-weight:700;margin-top:4px">xAI · Grok 5 训练中</div></div>'
+  ]};
+
+  // ---- 设备框架 / 数据筛选器 / 图片画廊 / 正文引用块 / 相关文章 ----
+  DATA.deviceframe = {variants:[
+    '<div class="glass" style="overflow:hidden;padding:0;max-width:280px"><div style="display:flex;gap:6px;padding:8px 10px;border-bottom:1px solid var(--line)"><span style="width:8px;height:8px;border-radius:50%;background:var(--line)"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--line)"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--line)"></span></div><div style="height:100px;background:linear-gradient(135deg,var(--i1),var(--i3))"></div></div>',
+    '<div style="border:2px solid var(--ink);border-radius:14px;overflow:hidden;max-width:280px"><div style="height:20px;background:var(--ink)"></div><div style="height:100px;background:linear-gradient(135deg,var(--i2),var(--i4))"></div></div>'
+  ]};
+  DATA.datafilter = {variants:[
+    '<div style="display:flex;gap:8px;flex-wrap:wrap"><span class="gtag on">分类▾</span><span class="gtag">标签▾</span><span class="gtag">日期▾</span></div>',
+    '<div class="glass" style="display:flex;padding:4px;border-radius:999px;gap:4px"><span class="gtag on" style="background:linear-gradient(90deg,var(--i1),var(--i3));color:#fff">分类</span><span class="gtag" style="background:none;border:none">标签</span><span class="gtag" style="background:none;border:none">日期</span></div>'
+  ]};
+  DATA.gallery = {variants:[
+    '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">' + ['var(--i1)','var(--i2)','var(--i3)'].map(function(c){return '<div style="aspect-ratio:1;border-radius:10px;background:'+c+'"></div>';}).join('') + '</div>',
+    '<div style="display:flex;gap:8px;overflow-x:auto">' + ['var(--i1)','var(--i2)','var(--i3)','var(--i4)'].map(function(c){return '<div style="width:100px;height:70px;border-radius:10px;background:'+c+';flex-shrink:0"></div>';}).join('') + '</div>'
+  ]};
+  DATA.pullquote = {variants:[
+    '<div style="border-left:3px solid var(--i2);padding-left:16px;font-size:16px;font-weight:700;font-style:italic;margin:14px 0">"failure is an option here. If things are not failing, you are not innovating enough."</div>',
+    '<div style="text-align:center;padding:16px 0"><div class="grad-text" style="font-size:18px;font-weight:800">"failure is an option here."</div></div>'
+  ]};
+  DATA.related = {variants:[
+    '<div class="cardgrid">' + ['Master Plan Part Deux','Master Plan Part 3'].map(function(t){return '<div class="glass gcard"><div style="font-size:9.5px;color:var(--sub);text-transform:uppercase">Related</div><h4 style="font-size:13px;margin:6px 0 0;font-weight:800">'+t+'</h4></div>';}).join('') + '</div>',
+    '<div class="glass" style="padding:6px">' + ['Master Plan Part Deux','Master Plan Part 3'].map(function(t){return '<div class="grow"><span style="font-size:12.5px;font-weight:700">'+t+'</span><span style="color:var(--sub)">→</span></div>';}).join('') + '</div>'
+  ]};
+
+  // ---- 数字滚动 / 标签云 / 订阅 / 单平台分享 / 收藏 ----
+  DATA.countup = {variants:[
+    '<div class="grad-text" id="countupDemo" style="font-size:34px;font-weight:800;font-variant-numeric:tabular-nums">0</div><p style="font-size:11px;color:var(--sub)">点击"⇄"重新播放0→14滚动动画</p>',
+    '<div class="grad-text" style="font-size:34px;font-weight:800">14</div><p style="font-size:11px;color:var(--sub)">静态直接显示，不做滚动动画</p>'
+  ]};
+  DATA.tagcloud = {variants:[
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span class="gtag" style="font-size:15px">工程</span><span class="gtag">航天</span><span class="gtag" style="font-size:18px">第一性原理</span><span class="gtag">能源</span><span class="gtag" style="font-size:13px">AI</span></div>',
+    '<div style="display:flex;gap:10px;flex-wrap:wrap"><span class="grad-text" style="font-weight:800;font-size:16px">工程</span><span class="grad-text" style="font-weight:800;font-size:22px">第一性原理</span><span class="grad-text" style="font-weight:800;font-size:13px">AI</span></div>'
+  ]};
+  DATA.newsletter = {variants:[
+    '<div class="glass gcard" style="display:flex;gap:8px"><input placeholder="you@email.com" style="flex:1;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:12px;background:transparent;color:var(--ink)"/><span class="gbtn">订阅</span></div>',
+    '<div style="text-align:center"><span class="gbtn">订阅更新 →</span></div>'
+  ]};
+  DATA.socialshare = {variants:[
+    '<div style="display:flex;gap:10px"><span class="glass gring" style="display:flex;align-items:center;justify-content:center">𝕏</span><span class="glass gring" style="display:flex;align-items:center;justify-content:center;color:#07C160">微</span></div>',
+    '<div style="display:flex;gap:10px"><span class="gbtn" style="background:#000">分享到 X</span><span class="gbtn" style="background:#07C160">分享到微信</span></div>'
+  ]};
+  DATA.bookmark = {variants:[
+    '<span class="glass gring" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer">☆</span>',
+    '<span class="gbtn">＋ 收藏</span>'
+  ]};
+
+  // ---- util2: 404 / loading / search / toast / breadcrumb / pagination / sort / updated / language ----
+  DATA.notfound = {variants:[
+    '<div style="text-align:center"><div class="grad-text" style="font-size:32px;font-weight:900">404</div><p style="font-size:12px;color:var(--sub);margin-top:6px">页面不存在</p></div>',
+    '<div style="text-align:center"><div style="font-size:14px;font-weight:700">页面走丢了</div><span class="gbtn" style="margin-top:10px;display:inline-block">回首页</span></div>'
+  ]};
+  DATA.loading = {variants:[
+    '<div class="skel" style="height:14px;width:80%;margin-bottom:8px"></div><div class="skel" style="height:14px;width:60%"></div>',
+    '<div class="pv1-track"><div class="pv1-fill" style="width:40%"></div></div>'
+  ]};
+  DATA.search = {variants:[
+    '<div class="glass" style="padding:9px 14px;border-radius:10px;font-size:12px;color:var(--sub)">🔍 搜索文章、原则……</div>',
+    '<div class="glass" style="padding:9px 14px;border-radius:10px;font-size:12px;color:var(--sub);display:flex;justify-content:space-between"><span>🔍 搜索</span><span class="mono" style="font-size:10px">⌘K</span></div>'
+  ]};
+  DATA.toast = {variants:[
+    '<div class="glass gcard" style="display:inline-flex;gap:8px;align-items:center"><span>✓</span><span style="font-size:12px">已复制链接</span></div>',
+    '<div style="background:var(--ink);color:#fff;padding:9px 16px;border-radius:10px;font-size:12px;display:inline-block">已收藏这篇文章</div>'
+  ]};
+  DATA.breadcrumb = {variants:[
+    '<div style="font-size:11.5px;color:var(--sub)">首页 / Essays / Master Plan</div>',
+    '<div style="font-size:11.5px;color:var(--sub)">首页 <span class="grad-text" style="font-weight:700">›</span> Essays <span class="grad-text" style="font-weight:700">›</span> Master Plan</div>'
+  ]};
+  DATA.pagination = {variants:[
+    '<div style="display:flex;gap:6px"><span class="glass gring" style="display:flex;align-items:center;justify-content:center;font-size:12px">1</span><span class="gring" style="display:flex;align-items:center;justify-content:center;font-size:12px;background:linear-gradient(90deg,var(--i1),var(--i3));color:#fff">2</span><span class="glass gring" style="display:flex;align-items:center;justify-content:center;font-size:12px">3</span></div>',
+    '<span class="gbtn">加载更多 ↓</span>'
+  ]};
+  DATA.sort = {variants:[
+    '<select class="glass" style="border:none;padding:8px 12px;border-radius:8px;font-size:12px;color:var(--ink)"><option>最新优先</option><option>最热优先</option></select>',
+    '<div style="display:flex;gap:6px"><span class="gtag on">最新</span><span class="gtag">最热</span></div>'
+  ]};
+  DATA.updated = {variants:[
+    '<div class="mono" style="font-size:10.5px;color:var(--sub)">最后更新 2026.07.07</div>',
+    '<div style="font-size:10.5px;color:var(--sub)">7天前更新过</div>'
+  ]};
+  DATA.language = {variants:[
+    '<div class="th3"><span class="on">简体</span><span>繁體</span></div>',
+    '<span class="gtag on">简 / 繁</span>'
+  ]};
+
+  var LONGTAIL_KEYS = ['collectiontabs','collectioncover','articletable','articlemeta','articlebody','articletoc','bilingual','articlenav','share','qrcode','readprogress','monthlylist','monthlytimeline','principlefilter','principleexpand','bookdetail','watching','syncstatus','heatmap','badges','explorecards','dispatch','deviceframe','datafilter','gallery','pullquote','related','countup','tagcloud','newsletter','socialshare','bookmark','notfound','loading','search','toast','breadcrumb','pagination','sort','updated','language'];
+
   var state = {nav:0, hero:0, stat:0, card:0, quote:0, footer:0, intro:0, timeline:0, companies:0, contact:0, progress:0, bookshelf:0, principle:0, theme:0, backtop:0, empty:0};
+  LONGTAIL_KEYS.forEach(function(k){ state[k] = 0; });
 
   function render(key){
     var d = DATA[key];
@@ -126,6 +318,12 @@
     var lbl = document.getElementById('lbl-'+key);
     if(lbl) lbl.textContent = (state[key]+1)+'/'+d.variants.length;
     if(key==='footer') tickClock();
+    if(key==='countup') playCountup();
+  }
+  function playCountup(){
+    var cu = document.getElementById('countupDemo');
+    if(!cu) return;
+    var n=0; var iv=setInterval(function(){ n++; cu.textContent=n; if(n>=14) clearInterval(iv); }, 90);
   }
   window.cycle = function(key){
     state[key] = (state[key]+1) % DATA[key].variants.length;
@@ -137,6 +335,6 @@
     el.textContent = 'local time ' + new Date().toLocaleTimeString('zh-CN',{hour12:false});
   }
 
-  ['nav','hero','stat','card','quote','footer','intro','timeline','companies','contact','progress','bookshelf','principle','theme','backtop','empty'].forEach(render);
+  ['nav','hero','stat','card','quote','footer','intro','timeline','companies','contact','progress','bookshelf','principle','theme','backtop','empty'].concat(LONGTAIL_KEYS).forEach(render);
   setInterval(tickClock, 1000);
 })();
