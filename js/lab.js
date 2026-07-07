@@ -72,7 +72,53 @@
     '<div class="glass ctv3">' + CONTACT.map(function(c){return '<div class="ctv3-row"><span style="font-weight:700;font-size:13px">'+c.n+'</span><span style="font-size:12px;color:var(--sub)">'+c.v+'</span></div>';}).join('') + '</div>'
   ];
 
-  var state = {nav:0, hero:0, stat:0, card:0, quote:0, footer:0, intro:0, timeline:0, companies:0, contact:0};
+  var PROGRESS = [
+    {n:'Starship 轨道测试',p:72},{n:'Optimus 量产筹备',p:38},{n:'Neuralink 二期临床',p:55}
+  ];
+  DATA.progress = {variants:[
+    '<div class="glass pv1">' + PROGRESS.map(function(p){return '<div class="pv1-row"><div class="pv1-top"><span>'+p.n+'</span><span class="grad-text" style="font-weight:800">'+p.p+'%</span></div><div class="pv1-track"><div class="pv1-fill" style="width:'+p.p+'%"></div></div></div>';}).join('') + '</div>',
+    '<div class="glass pv2">' + PROGRESS.map(function(p,i){var cols=['linear-gradient(90deg,var(--i1),var(--i3))','linear-gradient(90deg,var(--i2),var(--i4))','linear-gradient(90deg,var(--i3),var(--i1))'];return '<div class="pv2-item"><div class="lbl2">'+p.n+'</div><div class="pv2-track"><div class="pv2-fill" style="width:'+p.p+'%;background:'+cols[i%3]+'"></div></div><span class="mono" style="font-size:11px;color:var(--sub)">'+p.p+'%</span></div>';}).join('') + '</div>',
+    '<div class="pv3">' + PROGRESS.map(function(p){return '<div class="pv3-item"><div class="pv3-ring" style="background:conic-gradient(var(--i2) 0 '+p.p+'%, var(--line) '+p.p+'% 100%)"><span>'+p.p+'%</span></div><div style="font-size:11px;color:var(--sub);max-width:80px">'+p.n+'</div></div>';}).join('') + '</div>'
+  ]};
+
+  var BOOKS = [
+    {t:'The Almanack of Naval Ravikant',c:'#6366f1'},{t:'Elon Musk (传记)',c:'#a855f7'},
+    {t:'Zero to One',c:'#ec4899'},{t:'The Innovator\'s Dilemma',c:'#06b6d4'}
+  ];
+  DATA.bookshelf = {variants:[
+    '<div class="glass bs1">' + BOOKS.map(function(b,i){var h=[130,150,110,140][i];return '<div class="bs1-spine" style="height:'+h+'px;background:'+b.c+'">'+b.t.slice(0,14)+'</div>';}).join('') + '</div>',
+    '<div class="bs2">' + BOOKS.map(function(b){return '<div class="glass bs2-item"><div class="bs2-cover" style="background:'+b.c+'"></div><div class="bs2-body"><h4>'+b.t+'</h4></div></div>';}).join('') + '</div>',
+    '<div class="glass bs3">' + BOOKS.map(function(b){return '<div class="bs3-row"><div class="bs3-dot" style="background:'+b.c+'"></div><span style="font-size:13px;font-weight:600">'+b.t+'</span></div>';}).join('') + '</div>'
+  ]};
+
+  var PRINCIPLES = [
+    {n:'01',t:'第一性原理',s:'把问题拆到最基本的事实，再往上推导'},
+    {n:'02',t:'允许失败',s:'没有失败发生，说明创新得不够'},
+    {n:'03',t:'速度即优势',s:'一周投入80-100小时换四个月做完一年的量'}
+  ];
+  DATA.principle = {variants:[
+    '<div class="pr1">' + PRINCIPLES.map(function(p){return '<div class="glass pr1-item"><div class="idx grad-text">P'+p.n+'</div><h4>'+p.t+'</h4><p style="font-size:11.5px;color:var(--sub);margin:6px 0 0">'+p.s+'</p></div>';}).join('') + '</div>',
+    '<div class="pr2">' + PRINCIPLES.map(function(p){return '<div class="glass pr2-item"><div class="idx grad-text mono" style="font-family:ui-monospace,monospace;font-weight:800;font-size:11px">P'+p.n+'</div><h4 style="margin:8px 0 4px">'+p.t+'</h4><p style="font-size:11.5px;color:var(--sub);margin:0">'+p.s+'</p></div>';}).join('') + '</div>',
+    '<div class="glass pr3">' + PRINCIPLES.map(function(p){return '<div class="pr3-row"><span class="big grad-text">'+p.n+'</span><div><div style="font-weight:800;font-size:14px">'+p.t+'</div><div style="font-size:12px;color:var(--sub);margin-top:3px">'+p.s+'</div></div></div>';}).join('') + '</div>'
+  ]};
+
+  DATA.theme = {variants:[
+    '<div class="th1"><span class="on">浅色</span><span>深色</span></div>',
+    '<div class="th2 glass">🌙</div>',
+    '<div class="th3"><span class="on">Light</span><span>Dark</span></div>'
+  ]};
+  DATA.backtop = {variants:[
+    '<div class="bt1" style="background:linear-gradient(135deg,var(--i1),var(--i3))">↑</div>',
+    '<div class="bt2" style="background:linear-gradient(90deg,var(--i1),var(--i3))">↑ Top</div>',
+    '<div class="bt3" style="background:conic-gradient(var(--i2) 0 65%, var(--line) 65% 100%)"><span>↑</span></div>'
+  ]};
+  DATA.empty = {variants:[
+    '<div class="es1"><div class="ic"></div><div style="font-size:13px;color:var(--sub)">暂无内容</div></div>',
+    '<div class="es2"><div class="ic"></div><div style="font-size:13.5px;color:var(--sub)">这里还没有文章</div><span class="btn">去写一篇</span></div>',
+    '<div class="es3">暂无数据 · 稍后再来看看</div>'
+  ]};
+
+  var state = {nav:0, hero:0, stat:0, card:0, quote:0, footer:0, intro:0, timeline:0, companies:0, contact:0, progress:0, bookshelf:0, principle:0, theme:0, backtop:0, empty:0};
 
   function render(key){
     var d = DATA[key];
@@ -91,6 +137,6 @@
     el.textContent = 'local time ' + new Date().toLocaleTimeString('zh-CN',{hour12:false});
   }
 
-  ['nav','hero','stat','card','quote','footer','intro','timeline','companies','contact'].forEach(render);
+  ['nav','hero','stat','card','quote','footer','intro','timeline','companies','contact','progress','bookshelf','principle','theme','backtop','empty'].forEach(render);
   setInterval(tickClock, 1000);
 })();

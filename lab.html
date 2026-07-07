@@ -147,6 +147,63 @@
   .ctv3-row{display:flex;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);}
   .ctv3-row:last-child{border-bottom:none;}
 
+  .pv1{padding:20px;}
+  .pv1-row{margin-bottom:16px;}
+  .pv1-row:last-child{margin-bottom:0;}
+  .pv1-top{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:7px;}
+  .pv1-track{height:8px;border-radius:99px;background:var(--line);overflow:hidden;}
+  .pv1-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--i1),var(--i3));}
+  .pv2{display:flex;flex-direction:column;gap:14px;}
+  .pv2-item{display:flex;align-items:center;gap:14px;padding:14px 18px;}
+  .pv2-item .lbl2{width:110px;font-size:12.5px;font-weight:700;flex-shrink:0;}
+  .pv2-track{flex:1;height:6px;border-radius:99px;background:var(--line);overflow:hidden;}
+  .pv2-fill{height:100%;border-radius:99px;}
+  .pv3{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;}
+  .pv3-item{text-align:center;}
+  .pv3-ring{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;margin:0 auto 8px;}
+  .pv3-ring span{position:relative;background:var(--bg);width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;}
+
+  .bs1{display:flex;gap:4px;align-items:flex-end;padding:20px;}
+  .bs1-spine{width:26px;border-radius:4px 4px 0 0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;color:#fff;font-size:9px;writing-mode:vertical-rl;font-weight:700;}
+  .bs2{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  .bs2-item{padding:0;overflow:hidden;}
+  .bs2-cover{height:70px;}
+  .bs2-body{padding:10px;}
+  .bs2-body h4{font-size:11.5px;margin:0;font-weight:700;}
+  .bs3{display:flex;flex-direction:column;gap:2px;}
+  .bs3-row{display:flex;align-items:center;gap:12px;padding:12px 16px;}
+  .bs3-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+
+  .pr1{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .pr1-item{padding:18px;}
+  .pr1-item .idx{font-family:ui-monospace,monospace;font-size:11px;font-weight:800;margin-bottom:8px;}
+  .pr1-item h4{font-size:13.5px;margin:0;font-weight:800;}
+  .pr2{display:flex;gap:14px;overflow-x:auto;padding:4px;}
+  .pr2-item{flex-shrink:0;width:200px;padding:16px;}
+  .pr3{display:flex;flex-direction:column;gap:0;}
+  .pr3-row{display:flex;gap:18px;padding:16px 4px;border-bottom:1px solid var(--line);align-items:baseline;}
+  .pr3-row .big{font-size:28px;font-weight:900;opacity:.25;font-family:ui-monospace,monospace;}
+
+  .th1{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px;gap:2px;}
+  .th1 span{padding:7px 14px;border-radius:999px;font-size:12px;cursor:pointer;}
+  .th1 span.on{background:linear-gradient(90deg,var(--i1),var(--i3));color:#fff;}
+  .th2{width:44px;height:44px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;}
+  .th3{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  .th3 span{padding:9px 16px;font-size:12px;cursor:pointer;}
+  .th3 span.on{background:var(--ink);color:#fff;}
+
+  .bt1{width:46px;height:46px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:16px;box-shadow:0 10px 24px rgba(99,102,241,.3);}
+  .bt2{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:999px;color:#fff;font-size:12.5px;font-weight:700;box-shadow:0 10px 24px rgba(99,102,241,.3);}
+  .bt3{width:52px;height:52px;border-radius:50%;position:relative;display:inline-flex;align-items:center;justify-content:center;}
+  .bt3 span{position:relative;background:var(--bg);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;}
+
+  .es1{text-align:center;padding:40px 20px;}
+  .es1 .ic{width:56px;height:56px;border-radius:16px;margin:0 auto 16px;background:linear-gradient(135deg,var(--i1),var(--i3));opacity:.5;}
+  .es2{text-align:center;padding:44px 20px;}
+  .es2 .ic{width:80px;height:80px;border-radius:50%;margin:0 auto 18px;background:linear-gradient(135deg,var(--i1),var(--i2),var(--i3));opacity:.35;}
+  .es2 .btn{display:inline-block;margin-top:14px;padding:10px 22px;border-radius:999px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;}
+  .es3{text-align:center;padding:24px;font-size:13px;color:var(--sub);}
+
   .f1-grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:20px;padding:36px 0 20px;}
   .f1-grid h4{font-size:10px;text-transform:uppercase;color:var(--sub);margin:0 0 8px;}
   .f1-grid a{display:block;font-size:12.5px;margin-bottom:6px;cursor:pointer;}
@@ -197,6 +254,46 @@
     <div class="zone-tag">引用块</div>
     <div class="switcher"><span class="lbl" id="lbl-quote">1/3</span><button onclick="cycle('quote')">⇄</button></div>
     <div id="slot-quote"></div>
+  </section>
+
+  <section class="sec zone" id="zone-progress">
+    <div class="zone-tag">进度条</div>
+    <div class="switcher"><span class="lbl" id="lbl-progress">1/3</span><button onclick="cycle('progress')">⇄</button></div>
+    <div class="sechead"><div><div class="eyebrow grad-text">Now</div><h2 class="h2">在做的事</h2></div></div>
+    <div id="slot-progress"></div>
+  </section>
+
+  <section class="sec zone" id="zone-bookshelf">
+    <div class="zone-tag">书架</div>
+    <div class="switcher"><span class="lbl" id="lbl-bookshelf">1/3</span><button onclick="cycle('bookshelf')">⇄</button></div>
+    <div class="sechead"><div><div class="eyebrow grad-text">Reading</div><h2 class="h2">书单</h2></div></div>
+    <div id="slot-bookshelf"></div>
+  </section>
+
+  <section class="sec zone" id="zone-principle">
+    <div class="zone-tag">原则卡片</div>
+    <div class="switcher"><span class="lbl" id="lbl-principle">1/3</span><button onclick="cycle('principle')">⇄</button></div>
+    <div class="sechead"><div><div class="eyebrow grad-text">Principles</div><h2 class="h2">信条</h2></div></div>
+    <div id="slot-principle"></div>
+  </section>
+
+  <section class="sec zone" id="zone-util">
+    <div class="zone-tag">工具类控件</div>
+    <div class="sechead"><div><div class="eyebrow grad-text">Utility</div><h2 class="h2">深浅切换 / 返回顶部 / 空状态</h2></div></div>
+    <div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap;">
+      <div class="zone" style="position:relative;padding-top:6px">
+        <div class="switcher" style="position:static;display:inline-flex;margin-bottom:10px;opacity:1"><span class="lbl" id="lbl-theme">1/3</span><button onclick="cycle('theme')">⇄</button></div>
+        <div id="slot-theme"></div>
+      </div>
+      <div class="zone" style="position:relative;padding-top:6px">
+        <div class="switcher" style="position:static;display:inline-flex;margin-bottom:10px;opacity:1"><span class="lbl" id="lbl-backtop">1/3</span><button onclick="cycle('backtop')">⇄</button></div>
+        <div id="slot-backtop"></div>
+      </div>
+      <div class="glass zone" style="position:relative;padding-top:6px;flex:1;min-width:260px">
+        <div class="switcher" style="position:static;display:inline-flex;margin-bottom:10px;opacity:1"><span class="lbl" id="lbl-empty">1/3</span><button onclick="cycle('empty')">⇄</button></div>
+        <div id="slot-empty"></div>
+      </div>
+    </div>
   </section>
 
   <section class="sec zone" id="zone-timeline">
