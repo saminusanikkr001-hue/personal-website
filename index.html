@@ -8,113 +8,75 @@
 </head>
 <body>
 
+<div class="mesh"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+
 <header class="top">
-  <div class="mark">NOTES <span>·</span> MUSK</div>
+  <div class="mark">NOTES <span>✦ MUSK</span></div>
   <nav class="nav">
     <a class="navlink on" data-view="home" onclick="showView('home')">Essays</a>
     <a class="navlink" data-view="companies" onclick="showView('companies')">Companies</a>
     <a class="navlink" data-view="quotes" onclick="showView('quotes')">Quotes</a>
     <a class="navlink" data-view="timeline" onclick="showView('timeline')">Timeline</a>
   </nav>
-  <div class="clock mono" id="clock">--:--:--</div>
 </header>
 
-<div class="view active" data-view="home">
-  <div class="hero">
-    <div class="hero-photo"></div>
-    <div class="badge-locate"><span class="dot"></span>PRETORIA → AUSTIN</div>
-    <div class="float-btn" onclick="showView('companies')">EXPLORE<br/>COMPANIES →</div>
-    <div class="hero-inner">
-      <h1 class="giant" id="g1">FIRST</h1>
-      <h1 class="giant" id="g2">PRINCIPLES</h1>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div class="dek-strip">
-      <p class="dek">测试素材：马斯克真实公开内容。<b>照片沉浸式Hero + 巨字压边 + 浮动圆按钮</b>，取自Dennis Snellenberg首页的构图逻辑；下方内容改用<b>数据表格排版</b>，取自其Work列表页——同一站点里两种视觉重量并存。</p>
-      <div class="stats-inline">
-        <div class="stat-inline"><div class="n">03</div><div class="l">Essays</div></div>
-        <div class="stat-inline"><div class="n">06</div><div class="l">Companies</div></div>
-        <div class="stat-inline"><div class="n">07</div><div class="l">Quotes</div></div>
+<div class="wrap">
+  <div class="view active" data-view="home">
+    <div class="hero">
+      <div class="status-pill"><span class="dot"></span>6 companies · live</div>
+      <h1 class="h1">Reason from first<br/>principles. Build bold.</h1>
+      <p class="dek">测试素材：马斯克真实公开内容。浅色底 + 鲜艳渐变 + 玻璃拟态——"高级炫酷"而不是"极简克制"，色彩本身就是主角。</p>
+      <div class="glass stats">
+        <div class="stat"><div class="n">03</div><div class="l">Essays</div></div>
+        <div class="stat"><div class="n">14</div><div class="l">Timeline</div></div>
+        <div class="stat"><div class="n">07</div><div class="l">Quotes</div></div>
+        <div class="stat"><div class="n">06</div><div class="l">Companies</div></div>
       </div>
     </div>
 
     <section class="sec">
-      <div class="sechead">
-        <div><div class="eyebrow">Essays</div><h2 class="h2">Master Plan</h2></div>
-        <div class="chips">
-          <div class="chip on">All<sup>3</sup></div>
-          <div class="chip">Tesla<sup>3</sup></div>
-        </div>
+      <div class="sechead"><div><div class="eyebrow">Explore</div><h2 class="h2">浏览</h2></div></div>
+      <div class="dirgrid">
+        <div class="glass dircard" onclick="showView('home')"><div class="idx">01</div><h3>Essays</h3><p>3篇 Master Plan</p></div>
+        <div class="glass dircard" onclick="showView('timeline')"><div class="idx">02</div><h3>Timeline</h3><p>14个真实节点</p></div>
+        <div class="glass dircard" onclick="showView('quotes')"><div class="idx">03</div><h3>Quotes</h3><p>7条真实语录</p></div>
+        <div class="glass dircard" onclick="showView('companies')"><div class="idx">04</div><h3>Companies</h3><p>6家公司</p></div>
       </div>
-      <div class="table">
-        <div class="thead"><div>Title</div><div>Company</div><div>Summary</div><div>Year</div></div>
-        <div id="essay-rows"></div>
-      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sechead"><div><div class="eyebrow">Essays</div><h2 class="h2">Master Plan</h2></div><button class="more" onclick="showView('home')">查看全部 →</button></div>
+      <div class="grid3" id="hero-cards"></div>
     </section>
 
     <section class="sec">
       <div class="sechead"><div><div class="eyebrow">Quote</div><h2 class="h2">最新一条</h2></div></div>
-      <div class="quote">
-        <p>"我们平时的思维方式是靠类比。第一性原理是把事情拆解到最基本的事实，再从那里往上推。"</p>
-        <div class="src">— Elon Musk · <b>2013年访谈</b></div>
-      </div>
+      <div class="glass quote"><p>"当一件事足够重要，即便胜算不在你这边，你也应该去做。"</p><div class="src">— Elon Musk · <b>广泛引用</b></div></div>
     </section>
   </div>
-</div>
 
-<div class="view" data-view="companies">
-  <div class="wrap" style="padding-top:40px">
-    <button class="back" onclick="showView('home')">← Back</button>
+  <div class="view" data-view="companies">
+    <button class="back" onclick="showView('home')">← 返回首页</button>
     <div class="sechead"><div><div class="eyebrow">Companies</div><h2 class="h2">正在运营（6家）</h2></div></div>
-    <div class="devgrid" id="companies-list"></div>
+    <div class="compgrid" id="companies-list"></div>
   </div>
-</div>
 
-<div class="view" data-view="quotes">
-  <div class="wrap" style="padding-top:40px">
-    <button class="back" onclick="showView('home')">← Back</button>
+  <div class="view" data-view="quotes">
+    <button class="back" onclick="showView('home')">← 返回首页</button>
     <div class="sechead"><div><div class="eyebrow">Quotes</div><h2 class="h2">语录（7条）</h2></div></div>
     <div id="quotes-list"></div>
   </div>
-</div>
 
-<div class="view" data-view="timeline">
-  <div class="wrap" style="padding-top:40px">
-    <button class="back" onclick="showView('home')">← Back</button>
+  <div class="view" data-view="timeline">
+    <button class="back" onclick="showView('home')">← 返回首页</button>
     <div class="sechead"><div><div class="eyebrow">Timeline</div><h2 class="h2">重要节点（14个）</h2></div></div>
-    <div class="table"><div class="thead"><div>Event</div><div></div><div>Detail</div><div>Year</div></div><div id="timeline-rows"></div></div>
+    <div id="timeline-list"></div>
   </div>
+
+  <div class="view" data-view="article"><div class="art-body" id="article-slot"></div></div>
+
+  <footer class="foot">TEST DATA · ELON MUSK PUBLIC CONTENT · 浅色高级炫酷方向</footer>
 </div>
-
-<div class="view" data-view="article"><div class="wrap" style="padding-top:40px"><div class="art-body" id="article-slot"></div></div></div>
-
-<footer class="foot">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div class="foot-brand">NOTES · MUSK
-        <p>测试素材站点，用于验证深度点击后重做的设计语言。定稿后将替换为真实内容。</p>
-      </div>
-      <div class="foot-col"><h4>Explore</h4>
-        <a onclick="showView('home')">Essays</a><a onclick="showView('companies')">Companies</a><a onclick="showView('quotes')">Quotes</a><a onclick="showView('timeline')">Timeline</a>
-      </div>
-      <div class="foot-col"><h4>Companies</h4>
-        <a>Tesla</a><a>SpaceX</a><a>Neuralink</a><a>xAI</a>
-      </div>
-      <div class="foot-col"><h4>Elsewhere</h4>
-        <a>X / Twitter</a><a>tesla.com</a><a>spacex.com</a>
-      </div>
-      <div class="foot-col"><h4>Info</h4>
-        <a>关于本Lab</a><a>设计系统文档</a>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <div>v2 · design language proof · 2026© edition</div>
-      <div id="localtime">local time --</div>
-    </div>
-  </div>
-</footer>
 
 <script src="js/main.js"></script>
 </body>
