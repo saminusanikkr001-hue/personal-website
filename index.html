@@ -12,36 +12,46 @@
 
 <header class="top">
   <div class="mark">NOTES <span>✦ MUSK</span></div>
-  <nav class="nav" id="mainNav">
-    <a class="navlink on" data-view="home" onclick="showView('home')">Essays</a>
-    <a class="navlink" data-view="companies" onclick="showView('companies')">Companies</a>
-    <a class="navlink" data-view="quotes" onclick="showView('quotes')">Quotes</a>
-    <a class="navlink" data-view="timeline" onclick="showView('timeline')">Timeline</a>
-    <a class="navlink" data-view="contact" onclick="showView('contact')">Contact</a>
-  </nav>
-  <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="菜单">☰</button>
+  <div class="header-right">
+    <nav class="nav" id="mainNav">
+      <a class="navlink on" data-view="home" onclick="showView('home')">Essays</a>
+      <a class="navlink" data-view="companies" onclick="showView('companies')">Companies</a>
+      <a class="navlink" data-view="quotes" onclick="showView('quotes')">Quotes</a>
+      <a class="navlink" data-view="timeline" onclick="showView('timeline')">Timeline</a>
+      <a class="navlink" data-view="contact" onclick="showView('contact')">Contact</a>
+    </nav>
+    <div class="theme-toggle" id="themeToggle">
+      <span class="on" data-theme="light" onclick="setTheme('light')">Light</span>
+      <span data-theme="dark" onclick="setTheme('dark')">Dark</span>
+    </div>
+    <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="菜单">☰</button>
+  </div>
 </header>
 
 <div class="wrap">
   <div class="view active" data-view="home">
     <div class="intro glass">
-      <div class="intro-avatar"></div>
-      <div class="intro-text">
+      <div class="intro-txt">
         <div class="eyebrow">About</div>
         <h2 class="h2" style="margin-top:6px">Elon Musk</h2>
         <p class="dek" style="margin:8px 0 0;max-width:56ch">创业者 · 工程师。1971年生于南非比勒陀利亚，宾夕法尼亚大学经济学与物理学双学位。1995年创立Zip2以来，先后创立/执掌Tesla、SpaceX、Neuralink、The Boring Company、X、xAI共6家在运营公司。</p>
       </div>
+      <div class="intro-stats">
+        <div><b>1971</b>出生年份</div>
+        <div><b>6</b>在运营公司</div>
+      </div>
     </div>
 
     <div class="hero">
+      <div class="dispatch glass"><span class="dot"></span><span>当前：xAI · Grok 5 训练中</span></div>
       <div class="status-pill"><span class="dot"></span>6 companies · live</div>
       <h1 class="h1">Reason from first<br/>principles. Build bold.</h1>
       <p class="dek">测试素材：马斯克真实公开内容。浅色底 + 鲜艳渐变 + 玻璃拟态——"高级炫酷"而不是"极简克制"，色彩本身就是主角。</p>
       <div class="glass stats">
-        <div class="stat"><div class="n">03</div><div class="l">Essays</div></div>
-        <div class="stat"><div class="n">14</div><div class="l">Timeline</div></div>
-        <div class="stat"><div class="n">07</div><div class="l">Quotes</div></div>
-        <div class="stat"><div class="n">06</div><div class="l">Companies</div></div>
+        <div class="stat"><div class="n" data-target="3">0</div><div class="l">Essays</div></div>
+        <div class="stat"><div class="n" data-target="14">0</div><div class="l">Timeline</div></div>
+        <div class="stat"><div class="n" data-target="7">0</div><div class="l">Quotes</div></div>
+        <div class="stat"><div class="n" data-target="6">0</div><div class="l">Companies</div></div>
       </div>
     </div>
 
@@ -114,6 +124,8 @@
     </div>
   </footer>
 </div>
+
+<button class="backtop" id="backtop" onclick="scrollToTop()">↑ Top</button>
 
 <script src="js/main.js"></script>
 </body>

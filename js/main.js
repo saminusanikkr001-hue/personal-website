@@ -57,7 +57,7 @@
   };
 
   document.getElementById('hero-cards').innerHTML = ESSAYS.map(function(e,i){
-    return '<div class="glass card" onclick="openEssay('+i+')"><div class="date">'+e.d+'</div><h3>'+e.t+'</h3><p>'+e.body[0].slice(0,40)+'……</p></div>';
+    return '<div class="glass card" onclick="openEssay('+i+')"><div class="idx">0'+(i+1)+'</div><h3>'+e.t+'</h3><p>'+e.body[0].slice(0,40)+'……</p></div>';
   }).join('');
   document.getElementById('timeline-list').innerHTML = TIMELINE.map(function(n){
     return '<div class="glass listrow"><h3>'+n.t+'</h3><span class="date">'+n.yr+'</span></div>';
@@ -78,4 +78,49 @@
     el.textContent = 'local time ' + new Date().toLocaleTimeString('zh-CN',{hour12:false}) + ' · GMT+8';
   }
   tickClock(); setInterval(tickClock, 1000);
+
+  // 深浅色切换（手动，不跟随系统）
+  window.setTheme = function(mode){
+    document.documentElement.setAttribute('data-theme', mode);
+    document.querySelectorAll('#themeToggle span').forEach(function(s){
+      s.classList.toggle('on', s.dataset.theme===mode);
+    });
+    try{ localStorage.setItem('siteTheme', mode); }catch(e){}
+  };
+  (function initTheme(){
+    var saved = 'light';
+    try{ saved = localStorage.getItem('siteTheme') || 'light'; }catch(e){}
+    setTheme(saved);
+  })();
+
+  // 返回顶部
+  var backtopBtn = document.getElementById('backtop');
+  window.scrollToTop = function(){ window.scrollTo({top:0,behavior:'smooth'}); };
+  window.addEventListener('scroll', function(){
+    if(!backtopBtn) return;
+    backtopBtn.classList.toggle('show', window.scrollY > 400);
+  });
+
+  // 数字滚动动画（首页统计条，滚动到可见时触发一次）
+  var statNums = document.querySelectorAll('.stat .n[data-target]');
+  if(statNums.length && 'IntersectionObserver' in window){
+    var animated = false;
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting && !animated){
+          animated = true;
+          statNums.forEach(function(el){
+            var target = parseInt(el.dataset.target, 10);
+            var n = 0;
+            var iv = setInterval(function(){
+              n++; el.textContent = n;
+              if(n >= target) clearInterval(iv);
+            }, 80);
+          });
+          obs.disconnect();
+        }
+      });
+    }, {threshold:.4});
+    obs.observe(statNums[0].closest('.stats'));
+  }
 })();
