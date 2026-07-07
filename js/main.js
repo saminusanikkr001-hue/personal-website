@@ -71,9 +71,15 @@
     return '<div class="glass collcard"><div class="top" style="background:'+tops[i%4]+'"></div><div class="body"><h3>'+c.name+'</h3><p>'+c.desc+' · '+c.count+'篇</p></div></div>';
   }).join('');
 
-  // 静论页：全部文章表格
-  document.getElementById('article-table').innerHTML = ALL_ROWS.map(function(r,idx){
-    return '<div class="grow" style="cursor:pointer" onclick="openArticleByIndex('+idx+')"><span style="font-weight:600;font-size:13px">'+r.title+'</span><span class="gtag">'+r.coll+'</span></div>';
+  // 静论页：按合集分组展示，日期只显示已确认的，未知的留空
+  document.getElementById('article-by-collection').innerHTML = COLLECTIONS.map(function(c){
+    var rowsHtml = ALL_ROWS.map(function(r,idx){
+      if(r.key !== c.key) return '';
+      var meta = ARTICLES_WITH_BODY[r.title];
+      var dateStr = meta ? meta.date : '';
+      return '<div class="arow" onclick="openArticleByIndex('+idx+')"><span class="t">'+r.title+'</span><span class="d">'+dateStr+'</span></div>';
+    }).join('');
+    return '<div class="coll-group"><div class="coll-group-head"><h3>'+c.name+'</h3><span>'+c.count+'篇</span></div><div class="glass" style="padding:4px">'+rowsHtml+'</div></div>';
   }).join('');
 
   // 月报页
