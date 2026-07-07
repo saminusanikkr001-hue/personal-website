@@ -32,11 +32,19 @@
     {n:'Neuralink',s:'脑机接口技术',since:'2016创立'},{n:'Boring Co.',s:'隧道与地下交通',since:'2018独立'},
     {n:'X (Twitter)',s:'社交媒体平台',since:'2022收购'},{n:'xAI',s:'人工智能研究',since:'2023创立'}
   ];
+  var CONTACT=[
+    {n:'X / Twitter',v:'@elonmusk'},{n:'Tesla',v:'tesla.com'},
+    {n:'SpaceX',v:'spacex.com'},{n:'Neuralink',v:'neuralink.com'}
+  ];
 
   window.showView = function(name){
     document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('active', v.dataset.view===name);});
     document.querySelectorAll('.navlink').forEach(function(a){a.classList.toggle('on', a.dataset.view===name);});
+    document.getElementById('mainNav').classList.remove('open');
     window.scrollTo({top:0,behavior:'smooth'});
+  };
+  window.toggleMenu = function(){
+    document.getElementById('mainNav').classList.toggle('open');
   };
   window.openEssay = function(i){
     var e = ESSAYS[i];
@@ -60,4 +68,14 @@
   document.getElementById('companies-list').innerHTML = COMPANIES.map(function(c){
     return '<div class="glass comp"><h3>'+c.n+'</h3><p>'+c.s+'</p><div class="since">'+c.since+'</div></div>';
   }).join('');
+  document.getElementById('contact-list').innerHTML = CONTACT.map(function(c){
+    return '<div class="glass contact-card"><div class="ic"></div><div><h3>'+c.n+'</h3><p>'+c.v+'</p></div></div>';
+  }).join('');
+
+  function tickClock(){
+    var el = document.getElementById('localtime');
+    if(!el) return;
+    el.textContent = 'local time ' + new Date().toLocaleTimeString('zh-CN',{hour12:false}) + ' · GMT+8';
+  }
+  tickClock(); setInterval(tickClock, 1000);
 })();

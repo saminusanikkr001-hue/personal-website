@@ -12,16 +12,27 @@
 
 <header class="top">
   <div class="mark">NOTES <span>✦ MUSK</span></div>
-  <nav class="nav">
+  <nav class="nav" id="mainNav">
     <a class="navlink on" data-view="home" onclick="showView('home')">Essays</a>
     <a class="navlink" data-view="companies" onclick="showView('companies')">Companies</a>
     <a class="navlink" data-view="quotes" onclick="showView('quotes')">Quotes</a>
     <a class="navlink" data-view="timeline" onclick="showView('timeline')">Timeline</a>
+    <a class="navlink" data-view="contact" onclick="showView('contact')">Contact</a>
   </nav>
+  <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="菜单">☰</button>
 </header>
 
 <div class="wrap">
   <div class="view active" data-view="home">
+    <div class="intro glass">
+      <div class="intro-avatar"></div>
+      <div class="intro-text">
+        <div class="eyebrow">About</div>
+        <h2 class="h2" style="margin-top:6px">Elon Musk</h2>
+        <p class="dek" style="margin:8px 0 0;max-width:56ch">创业者 · 工程师。1971年生于南非比勒陀利亚，宾夕法尼亚大学经济学与物理学双学位。1995年创立Zip2以来，先后创立/执掌Tesla、SpaceX、Neuralink、The Boring Company、X、xAI共6家在运营公司。</p>
+      </div>
+    </div>
+
     <div class="hero">
       <div class="status-pill"><span class="dot"></span>6 companies · live</div>
       <h1 class="h1">Reason from first<br/>principles. Build bold.</h1>
@@ -73,9 +84,35 @@
     <div id="timeline-list"></div>
   </div>
 
+  <div class="view" data-view="contact">
+    <button class="back" onclick="showView('home')">← 返回首页</button>
+    <div class="sechead"><div><div class="eyebrow">Contact</div><h2 class="h2">联系方式</h2></div></div>
+    <div class="contact-grid" id="contact-list"></div>
+  </div>
+
   <div class="view" data-view="article"><div class="art-body" id="article-slot"></div></div>
 
-  <footer class="foot">TEST DATA · ELON MUSK PUBLIC CONTENT · 浅色高级炫酷方向</footer>
+  <footer class="foot">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="mark">NOTES <span>✦ MUSK</span></div>
+        <p>测试素材站点，用于验证"浅色高级炫酷"方向。定稿后将替换为真实内容。</p>
+      </div>
+      <div class="foot-col"><h4>Explore</h4>
+        <a onclick="showView('home')">Essays</a><a onclick="showView('companies')">Companies</a><a onclick="showView('quotes')">Quotes</a><a onclick="showView('timeline')">Timeline</a>
+      </div>
+      <div class="foot-col"><h4>Companies</h4>
+        <a>Tesla</a><a>SpaceX</a><a>Neuralink</a><a>xAI</a>
+      </div>
+      <div class="foot-col"><h4>Info</h4>
+        <a onclick="showView('contact')">Contact</a><a>关于本Lab</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>v15 · light-bold-glass · 2026© edition</div>
+      <div id="localtime">local time --</div>
+    </div>
+  </footer>
 </div>
 
 <script src="js/main.js"></script>
