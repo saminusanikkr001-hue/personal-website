@@ -33,10 +33,46 @@
       '<div class="f1-grid"><div><div style="font-weight:800">NOTES ✦ MUSK</div><p style="font-size:12px;color:var(--sub);margin-top:8px">测试素材站点</p></div><div><h4>EXPLORE</h4><a>Essays</a><a>Companies</a></div><div><h4>COMPANIES</h4><a>Tesla</a><a>SpaceX</a></div><div><h4>INFO</h4><a>Contact</a></div></div><div class="f1-bottom"><div>v16 edition</div><div class="mono" id="footclock">local time --</div></div>',
       '<div class="f2"><div class="socials"><span>X</span><span>in</span><span>@</span></div><p style="font-size:11.5px;color:var(--sub)">© 2026 NOTES · MUSK</p></div>',
       '<div class="f4"><h3 class="grad-text" style="font-size:24px;margin:0 0 14px">Let\'s talk</h3><span class="btn">Get in touch</span></div>'
-    ]}
+    ]},
+    intro: {variants:[
+      '<div class="glass iv1"><div class="av"></div><div><div class="eyebrow grad-text" style="font-size:11px">About</div><h2 style="margin:6px 0 8px;font-size:20px;font-weight:800">Elon Musk</h2><p style="color:var(--sub);font-size:13px;margin:0;max-width:54ch">创业者 · 工程师。1971年生于南非比勒陀利亚，先后创立/执掌Tesla、SpaceX等6家公司。</p></div></div>',
+      '<div class="glass iv2"><div class="av"></div><h2 style="margin:0 0 8px;font-size:20px;font-weight:800">Elon Musk</h2><p style="color:var(--sub);font-size:13px;max-width:50ch;margin:0 auto">创业者 · 工程师，先后创立/执掌6家在运营公司</p></div>',
+      '<div class="glass iv3"><div class="txt"><div class="eyebrow grad-text" style="font-size:11px">About</div><h2 style="margin:6px 0 8px;font-size:20px;font-weight:800">Elon Musk</h2><p style="color:var(--sub);font-size:12.5px;margin:0">创业者 · 工程师</p></div><div class="stats"><div><b>1971</b>出生年份</div><div><b>6</b>在运营公司</div></div></div>'
+    ]},
+    timeline: {variants:['','','']},
+    companies: {variants:['','','']},
+    contact: {variants:['','','']}
   };
 
-  var state = {nav:0, hero:0, stat:0, card:0, quote:0, footer:0};
+  var TIMELINE = [
+    {yr:'1995',t:'创立 Zip2'},{yr:'2002',t:'创立 SpaceX'},{yr:'2004',t:'投资特斯拉'},
+    {yr:'2016',t:'创立 Neuralink'},{yr:'2022',t:'收购 X'},{yr:'2023',t:'创立 xAI'}
+  ];
+  var COMPANIES = [
+    {n:'Tesla',s:'电动汽车与清洁能源'},{n:'SpaceX',s:'可重复使用火箭'},
+    {n:'Neuralink',s:'脑机接口技术'},{n:'X',s:'社交媒体平台'},{n:'xAI',s:'人工智能研究'}
+  ];
+  var CONTACT = [
+    {n:'X / Twitter',v:'@elonmusk'},{n:'Tesla',v:'tesla.com'},{n:'SpaceX',v:'spacex.com'},{n:'Neuralink',v:'neuralink.com'}
+  ];
+
+  DATA.timeline.variants = [
+    '<div class="glass tv1" style="padding:6px">' + TIMELINE.map(function(n){return '<div class="tv1-row"><span>'+n.t+'</span><span class="yr grad-text">'+n.yr+'</span></div>';}).join('') + '</div>',
+    '<div class="tv2">' + TIMELINE.map(function(n){return '<div class="glass tv2-item"><div class="yr grad-text">'+n.yr+'</div><div style="font-size:12px;color:var(--sub);margin-top:6px">'+n.t+'</div></div>';}).join('') + '</div>',
+    '<div class="tv3">' + TIMELINE.map(function(n,i){return '<div class="tv3-row'+(i%2?' right':'')+'"><div class="tv3-dot"></div><div class="glass tv3-card"><span class="yr grad-text mono" style="font-family:ui-monospace,monospace;font-weight:700">'+n.yr+'</span><div style="font-size:13px;font-weight:700;margin-top:4px">'+n.t+'</div></div></div>';}).join('') + '</div>'
+  ];
+  DATA.companies.variants = [
+    '<div class="cov1">' + COMPANIES.slice(0,3).map(function(c){return '<div class="glass cov1-item"><h3>'+c.n+'</h3><p>'+c.s+'</p></div>';}).join('') + '</div>',
+    '<div class="cov2">' + COMPANIES.map(function(c){return '<div class="glass cov2-item grad-text">'+c.n+'</div>';}).join('') + '</div>',
+    '<div class="cov3">' + COMPANIES.map(function(c){return '<div class="glass cov3-row"><div class="bar"></div><div><div style="font-weight:800;font-size:14px">'+c.n+'</div><div style="font-size:11.5px;color:var(--sub)">'+c.s+'</div></div></div>';}).join('') + '</div>'
+  ];
+  DATA.contact.variants = [
+    '<div class="ctv1">' + CONTACT.map(function(c){return '<div class="glass ctv1-item"><div class="ic"></div><div><h3 style="font-size:14px;margin:0 0 3px;font-weight:800">'+c.n+'</h3><p style="font-size:12px;color:var(--sub);margin:0">'+c.v+'</p></div></div>';}).join('') + '</div>',
+    '<div class="ctv2">' + CONTACT.map(function(c){return '<div class="ctv2-item"><div class="ic"></div><div style="font-size:11.5px;font-weight:700">'+c.n+'</div></div>';}).join('') + '</div>',
+    '<div class="glass ctv3">' + CONTACT.map(function(c){return '<div class="ctv3-row"><span style="font-weight:700;font-size:13px">'+c.n+'</span><span style="font-size:12px;color:var(--sub)">'+c.v+'</span></div>';}).join('') + '</div>'
+  ];
+
+  var state = {nav:0, hero:0, stat:0, card:0, quote:0, footer:0, intro:0, timeline:0, companies:0, contact:0};
 
   function render(key){
     var d = DATA[key];
@@ -55,6 +91,6 @@
     el.textContent = 'local time ' + new Date().toLocaleTimeString('zh-CN',{hour12:false});
   }
 
-  ['nav','hero','stat','card','quote','footer'].forEach(render);
+  ['nav','hero','stat','card','quote','footer','intro','timeline','companies','contact'].forEach(render);
   setInterval(tickClock, 1000);
 })();

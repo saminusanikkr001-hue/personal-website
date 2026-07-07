@@ -105,6 +105,48 @@
   .q3 .accent{width:5px;background:linear-gradient(180deg,var(--i2),var(--i4));}
   .q3 .body{padding:22px;}
 
+  .iv1{display:flex;gap:20px;align-items:center;padding:22px;}
+  .iv1 .av{width:64px;height:64px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--i1),var(--i2),var(--i3));}
+  .iv2{text-align:center;padding:30px;}
+  .iv2 .av{width:80px;height:80px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(135deg,var(--i1),var(--i2),var(--i3));}
+  .iv3{display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden;padding:0;}
+  .iv3 .txt{padding:24px;}
+  .iv3 .stats{display:flex;flex-direction:column;justify-content:center;gap:14px;padding:24px;background:rgba(99,102,241,.05);}
+  .iv3 .stats div{font-size:12px;color:var(--sub);}
+  .iv3 .stats b{display:block;font-size:20px;color:var(--ink);}
+
+  .tv1{display:flex;flex-direction:column;gap:2px;}
+  .tv1-row{display:flex;justify-content:space-between;padding:14px 18px;border-radius:12px;}
+  .tv1-row .yr{font-family:ui-monospace,monospace;font-size:12px;font-weight:700;}
+  .tv2{display:flex;gap:20px;overflow-x:auto;padding:16px 4px;}
+  .tv2-item{flex-shrink:0;width:150px;padding:16px;text-align:center;}
+  .tv2-item .yr{font-family:ui-monospace,monospace;font-weight:800;font-size:16px;}
+  .tv3{display:flex;flex-direction:column;gap:16px;}
+  .tv3-row{display:flex;gap:16px;align-items:center;}
+  .tv3-row.right{flex-direction:row-reverse;text-align:right;}
+  .tv3-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--i1),var(--i3));}
+  .tv3-card{flex:1;padding:14px 18px;}
+
+  .cov1{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .cov1-item{padding:20px;}
+  .cov1-item h3{font-size:15px;margin:0 0 6px;font-weight:800;}
+  .cov1-item p{font-size:11.5px;color:var(--sub);margin:0;}
+  .cov2{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+  .cov2-item{padding:14px 22px;border-radius:14px;font-weight:800;font-size:14px;}
+  .cov3{display:flex;flex-direction:column;gap:2px;}
+  .cov3-row{display:flex;padding:14px 18px;border-radius:10px;gap:14px;align-items:center;}
+  .cov3-row .bar{width:4px;height:28px;border-radius:2px;background:linear-gradient(180deg,var(--i1),var(--i3));}
+
+  .ctv1{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .ctv1-item{padding:20px;display:flex;align-items:center;gap:14px;}
+  .ctv1-item .ic{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--i1),var(--i3));flex-shrink:0;}
+  .ctv2{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;}
+  .ctv2-item{text-align:center;}
+  .ctv2-item .ic{width:48px;height:48px;border-radius:50%;margin:0 auto 8px;background:linear-gradient(135deg,var(--i1),var(--i3));}
+  .ctv3{display:flex;flex-direction:column;gap:0;}
+  .ctv3-row{display:flex;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);}
+  .ctv3-row:last-child{border-bottom:none;}
+
   .f1-grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:20px;padding:36px 0 20px;}
   .f1-grid h4{font-size:10px;text-transform:uppercase;color:var(--sub);margin:0 0 8px;}
   .f1-grid a{display:block;font-size:12.5px;margin-bottom:6px;cursor:pointer;}
@@ -125,6 +167,12 @@
 </header>
 
 <div class="wrap">
+
+  <section class="sec zone" id="zone-intro">
+    <div class="zone-tag">关于我</div>
+    <div class="switcher"><span class="lbl" id="lbl-intro">1/3</span><button onclick="cycle('intro')">⇄</button></div>
+    <div id="slot-intro"></div>
+  </section>
 
   <section class="sec zone" id="zone-hero">
     <div class="zone-tag">HERO</div>
@@ -149,6 +197,27 @@
     <div class="zone-tag">引用块</div>
     <div class="switcher"><span class="lbl" id="lbl-quote">1/3</span><button onclick="cycle('quote')">⇄</button></div>
     <div id="slot-quote"></div>
+  </section>
+
+  <section class="sec zone" id="zone-timeline">
+    <div class="zone-tag">时间线</div>
+    <div class="switcher"><span class="lbl" id="lbl-timeline">1/3</span><button onclick="cycle('timeline')">⇄</button></div>
+    <div class="sechead"><div><div class="eyebrow grad-text">Timeline</div><h2 class="h2">重要节点</h2></div></div>
+    <div id="slot-timeline"></div>
+  </section>
+
+  <section class="sec zone" id="zone-companies">
+    <div class="zone-tag">公司列表</div>
+    <div class="switcher"><span class="lbl" id="lbl-companies">1/3</span><button onclick="cycle('companies')">⇄</button></div>
+    <div class="sechead"><div><div class="eyebrow grad-text">Companies</div><h2 class="h2">正在运营</h2></div></div>
+    <div id="slot-companies"></div>
+  </section>
+
+  <section class="sec zone" id="zone-contact">
+    <div class="zone-tag">联系方式</div>
+    <div class="switcher"><span class="lbl" id="lbl-contact">1/3</span><button onclick="cycle('contact')">⇄</button></div>
+    <div class="sechead"><div><div class="eyebrow grad-text">Contact</div><h2 class="h2">联系方式</h2></div></div>
+    <div id="slot-contact"></div>
   </section>
 
 </div>
