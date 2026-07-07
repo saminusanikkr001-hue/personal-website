@@ -114,6 +114,7 @@ h2.h2{font-size:25px;font-weight:800;margin:6px 0 0;letter-spacing:-.01em;}
 .art-title{font-size:32px;font-weight:800;line-height:1.25;margin:0 0 26px;}
 .art-body{max-width:66ch;}
 .art-body p{font-size:15.5px;line-height:1.9;margin:0 0 20px;color:#3a3650;}
+.art-subhead{font-size:19px;font-weight:800;margin:36px 0 16px;padding-left:14px;border-left:3px solid var(--i2);color:var(--ink);}
 
 .view{display:none;}
 .view.active{display:block;animation:fadein .4s ease;}
