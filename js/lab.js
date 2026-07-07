@@ -308,9 +308,30 @@
   ]};
 
   var LONGTAIL_KEYS = ['collectiontabs','collectioncover','articletable','articlemeta','articlebody','articletoc','bilingual','articlenav','share','qrcode','readprogress','monthlylist','monthlytimeline','principlefilter','principleexpand','bookdetail','watching','syncstatus','heatmap','badges','explorecards','dispatch','deviceframe','datafilter','gallery','pullquote','related','countup','tagcloud','newsletter','socialshare','bookmark','notfound','loading','search','toast','breadcrumb','pagination','sort','updated','language'];
+  var CORE_KEYS = ['nav','hero','stat','card','quote','footer','intro','timeline','companies','contact','progress','bookshelf','principle','theme','backtop','empty'];
+  var ALL_KEYS = CORE_KEYS.concat(LONGTAIL_KEYS);
+  var LABELS = {
+    nav:'导航栏',hero:'Hero区',stat:'数据统计',card:'文章卡片',quote:'引用块',footer:'页脚',intro:'关于我',
+    timeline:'时间线',companies:'公司列表',contact:'联系方式',progress:'进度条',bookshelf:'书架',principle:'原则卡片',
+    theme:'深浅色切换',backtop:'返回顶部',empty:'空状态',collectiontabs:'合集切换标签',collectioncover:'合集封面卡片',
+    articletable:'文章列表表格版',articlemeta:'文章详情标题元信息',articlebody:'文章详情正文排版',articletoc:'文章详情侧边TOC',
+    bilingual:'双语切换',articlenav:'上一篇下一篇导航',share:'分享按钮',qrcode:'二维码展示',readprogress:'阅读进度条',
+    monthlylist:'月报列表',monthlytimeline:'月报对比时间轴',principlefilter:'原则分类筛选',principleexpand:'原则详情展开收起',
+    bookdetail:'单本书详情卡',watching:'追剧进度',syncstatus:'任务同步状态',heatmap:'执行记录热力图',badges:'成就标签',
+    explorecards:'浏览导览卡片',dispatch:'Dispatch速览面板',deviceframe:'设备框架母题',datafilter:'数据筛选器',
+    gallery:'内嵌图片画廊',pullquote:'正文引用块',related:'相关文章模块',countup:'数字滚动动画',tagcloud:'标签云',
+    newsletter:'订阅表单',socialshare:'单平台分享图标',bookmark:'收藏按钮',notfound:'404页',loading:'加载状态',
+    search:'搜索面板',toast:'Toast通知',breadcrumb:'面包屑导航',pagination:'分页控件',sort:'排序控件',
+    updated:'更新时间戳',language:'语言切换'
+  };
+  var STORE_KEY = 'labSelections_v1';
 
-  var state = {nav:0, hero:0, stat:0, card:0, quote:0, footer:0, intro:0, timeline:0, companies:0, contact:0, progress:0, bookshelf:0, principle:0, theme:0, backtop:0, empty:0};
-  LONGTAIL_KEYS.forEach(function(k){ state[k] = 0; });
+  var state = {};
+  ALL_KEYS.forEach(function(k){ state[k] = 0; });
+  try {
+    var saved = JSON.parse(localStorage.getItem(STORE_KEY) || '{}');
+    ALL_KEYS.forEach(function(k){ if(typeof saved[k] === 'number' && DATA[k] && saved[k] < DATA[k].variants.length) state[k] = saved[k]; });
+  } catch(e){}
 
   function render(key){
     var d = DATA[key];
@@ -328,6 +349,7 @@
   window.cycle = function(key){
     state[key] = (state[key]+1) % DATA[key].variants.length;
     render(key);
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch(e){}
   };
   function tickClock(){
     var el = document.getElementById('footclock');
@@ -335,6 +357,24 @@
     el.textContent = 'local time ' + new Date().toLocaleTimeString('zh-CN',{hour12:false});
   }
 
-  ['nav','hero','stat','card','quote','footer','intro','timeline','companies','contact','progress','bookshelf','principle','theme','backtop','empty'].concat(LONGTAIL_KEYS).forEach(render);
+  window.exportSelections = function(){
+    var lines = ALL_KEYS.map(function(k){
+      return (LABELS[k]||k) + '：变体 ' + (state[k]+1) + ' / ' + DATA[k].variants.length;
+    });
+    var text = lines.join('\n');
+    var box = document.getElementById('exportBox');
+    box.value = text;
+    box.style.display = 'block';
+    box.focus();
+    box.select();
+    try {
+      navigator.clipboard.writeText(text);
+      document.getElementById('exportHint').textContent = '已复制到剪贴板，也可以直接从下面文本框复制';
+    } catch(e){
+      document.getElementById('exportHint').textContent = '自动复制失败，请手动从下面文本框复制';
+    }
+  };
+
+  ALL_KEYS.forEach(render);
   setInterval(tickClock, 1000);
 })();
