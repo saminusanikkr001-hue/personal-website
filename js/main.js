@@ -20,7 +20,19 @@
     ds: ['阅读分享第一期：吴三桂——无处收留','《穿普拉达的女王》观后感','《活法》读后感','《埃隆马斯克传》读后感','《了凡四训》读后感','《斯坦福大学人生设计课》读后感','《成为1%》读后感','《千年悖论》读后感','《洪武》读后感','《饥饿的盛世》读后感','《把时间当作朋友》读后感','《新生——七年就是一辈子》读后感','《个体崛起》读后感','《大学突围》读后感','《少年派的奇幻漂流》观后感']
   };
 
-  var YUEBAO_MONTHS = ['2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06'];
+  var YUEBAO_MONTHS = [
+    {m:'2025-08', theme:'备齐', s:'暑假冲刺小组答辩，读完12本书约236万字，为开学做好准备'},
+    {m:'2025-09', theme:'新生', s:'到大连报道入学，军训季，第一次经历的事情很多'},
+    {m:'2025-10', theme:'自愈', s:'国庆回家团聚，一个人慢慢走出低谷'},
+    {m:'2025-11', theme:'独行', s:'一个人探索大连，逃离校园找到自己的自习节奏'},
+    {m:'2025-12', theme:'铺开', s:'和室友们从无到有，把宿舍生活搭建起来'},
+    {m:'2026-01', theme:'登机牌', s:'一个人走完整个寒假，把真实行程做成了登机牌形式的记录'},
+    {m:'2026-02', theme:'黑天鹅·眉批', s:'意料之外的事分量比计划里的更重，开始学编程'},
+    {m:'2026-03', theme:'搭', s:'连续用专栏概念写了14篇公众号文章，读完《智人之上》，开始用AI Agent'},
+    {m:'2026-04', theme:'赴', s:'19岁的第一个月，很多"想到就做"的事情落了地'},
+    {m:'2026-05', theme:'赠', s:'五一独自去长春待了十二小时，母亲节做了一份网页送给妈妈'},
+    {m:'2026-06', theme:'少年游', s:'毕业季，月报/投资/消费三套系统相隔十天独立建立，原则库从82条长到135条'}
+  ];
 
   var PRINCIPLE_CATS = [
     {name:'认知工具', count:31}, {name:'AI与工作', count:22}, {name:'人际关系', count:30},
@@ -83,13 +95,35 @@
   }).join('');
 
   // 月报页
-  document.getElementById('yuebao-list').innerHTML = '<div class="glass" style="padding:6px">' + YUEBAO_MONTHS.map(function(m){
-    return '<div class="grow"><span style="font-weight:700;font-size:13px">'+m+' 月报</span><span class="mono" style="font-size:11px;color:var(--sub)">个人版</span></div>';
-  }).join('') + '</div>';
+  document.getElementById('yuebao-list').innerHTML = YUEBAO_MONTHS.map(function(m){
+    return '<div class="glass" style="padding:16px 20px;margin-bottom:12px"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><h3 style="font-size:14.5px;margin:0;font-weight:800">'+m.m+' · 「'+m.theme+'」</h3></div><p style="font-size:12.5px;color:var(--sub);margin:0;line-height:1.6">'+m.s+'</p></div>';
+  }).join('');
 
   // 原则库页
   document.getElementById('principle-list').innerHTML = PRINCIPLE_CATS.map(function(c){
     return '<div class="glass tag-card"><div class="n">'+c.count+'</div><div class="l">'+c.name+'</div></div>';
+  }).join('');
+
+  // 现状页：来自任务系统导出快照（2026-07-07）
+  var STATUS_LABELS = [
+    {l:'老友记', v:'S02E01'},
+    {l:'在读', v:'《纳瓦尔宝典》第5篇'},
+    {l:'静论写作', v:'尚未设置合集进度'}
+  ];
+  var STATUS_BARS = [
+    {l:'数学分析', done:0, total:9},
+    {l:'金融大数据', done:0, total:5},
+    {l:'金融科技导论 · 练习', done:2, total:6},
+    {l:'英语四级', done:0, total:71}
+  ];
+  var statSyncEl = document.getElementById('status-sync-time');
+  if(statSyncEl) statSyncEl.textContent = '数据同步于 2026-07-07（手动，非实时）';
+  document.getElementById('status-labels').innerHTML = STATUS_LABELS.map(function(s){
+    return '<div class="grow"><span style="font-weight:700;font-size:13px">'+s.l+'</span><span style="font-size:12.5px;color:var(--sub)">'+s.v+'</span></div>';
+  }).join('');
+  document.getElementById('status-bars').innerHTML = STATUS_BARS.map(function(s){
+    var pct = s.total ? Math.round(s.done/s.total*100) : 0;
+    return '<div class="pv1-row"><div class="pv1-top"><span>'+s.l+'</span><span class="grad-text" style="font-weight:800">'+s.done+'/'+s.total+'</span></div><div class="pv1-track"><div class="pv1-fill" style="width:'+pct+'%"></div></div></div>';
   }).join('');
 
   function tickClock(){
