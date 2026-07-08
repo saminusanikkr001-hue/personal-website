@@ -2123,25 +2123,25 @@
   ];
 
   var PRINCIPLE_CATS = [
-    {name:'认知工具', count:31, picks:[
+    {key:'cog', name:'认知工具', count:31, picks:[
       {t:'逆向排除法', d:'不追正确答案，先看清所有能看见的错误选项——排除完剩下的，就是方向。'},
       {t:'疫苗思维', d:'在问"怎么处理"之前，先问"这件事该不该进入我的世界"。不该进入的，在门口拦住，不解释、不内耗。'},
       {t:'元认知闭环', d:'不满足于"觉得有道理"，靠输出、复盘和外部校准反复验证自己的认知模型是不是真的成立。'}
     ]},
-    {name:'AI与工作', count:22, picks:[
+    {key:'ai', name:'AI与工作', count:22, picks:[
       {t:'人是AI的手脚', d:'不是AI帮人干活，是人替AI跑它暂时跑不到的地方，跑完交回来处理——竞争优势在于喂给AI的原材料质量。'},
       {t:'系统优于习惯优于自律', d:'自律靠意志力，习惯靠场景，系统不依赖状态。能设计成系统的事，就不指望靠自律硬撑。'}
     ]},
-    {name:'人际关系', count:30, picks:[
+    {key:'rel', name:'人际关系', count:30, picks:[
       {t:'人唯二价值', d:'AI时代，人能提供的被压缩成两件事：朋友要见面开心，深度关系要给足安稳的幸福——多出来的消耗，默认不值得。'},
       {t:'双向幸运', d:'重要的关系是双向的幸运，不只是自己幸运遇见了对方，对方同样幸运遇见了自己。承认这一点，才是真正平等地站在关系里。'}
     ]},
-    {name:'自我原则', count:36, picks:[
+    {key:'self', name:'自我原则', count:36, picks:[
       {t:'抱怨操作系统删除', d:'能改变的改变，改变不了的接受，这两者之间没有"抱怨"这个选项。'},
       {t:'本自具足', d:'完整感从自己里面长出来，不需要向外借——不需要任何人来确认你值得，也不需要结果来验证一个决定是对的。'},
       {t:'给出去之后是干净的', d:'给出去的东西，意义在给出的那一刻就已经完整，不依赖对方怎么对待它。'}
     ]},
-    {name:'商业价值', count:16, picks:[
+    {key:'biz', name:'商业价值', count:16, picks:[
       {t:'成本视角 vs 价值视角', d:'市场只为价值付钱，不为成本付钱。感到不公平时，往往是用错了框架，而不是真的不公平。'},
       {t:'付费是最便宜的', d:'省下来的钱，往往是靠更贵的注意力和不确定性换来的——决策早就写在框架里，不需要每次重新算。'},
       {t:'输出即内化', d:'不用"记"来内化，用"输出"来内化。说出来才算真的想清楚，想清楚了才能落地。'}
@@ -2438,11 +2438,20 @@
     var picksHtml = (c.picks||[]).map(function(p){
       return '<div class="pk-item"><div class="pk-t">'+p.t+'</div><div class="pk-d">'+p.d+'</div></div>';
     }).join('');
-    return '<div class="glass pcat-card">'+
+    return '<div class="glass pcat-card" data-key="'+c.key+'">'+
       '<div class="pcat-head"><span class="n">'+c.count+'</span><span class="l">'+c.name+'</span></div>'+
       '<div class="pcat-picks">'+picksHtml+'</div>'+
     '</div>';
   }).join('');
+
+  // 原则库页：分类筛选标签
+  document.getElementById('pcat-tabs').innerHTML =
+    '<div class="coll-tab on" data-key="all" onclick="filterPrinciples(\'all\')">全部</div>' +
+    PRINCIPLE_CATS.map(function(c){ return '<div class="coll-tab" data-key="'+c.key+'" onclick="filterPrinciples(\''+c.key+'\')">'+c.name+'</div>'; }).join('');
+  window.filterPrinciples = function(key){
+    document.querySelectorAll('#pcat-tabs .coll-tab').forEach(function(t){ t.classList.toggle('on', t.dataset.key===key); });
+    document.querySelectorAll('.pcat-card').forEach(function(card){ card.style.display = (key==='all' || card.dataset.key===key) ? '' : 'none'; });
+  };
 
   // 现状页：来自任务系统导出快照（2026-07-07）
   var STATUS_LABELS = [
