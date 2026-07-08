@@ -2095,23 +2095,28 @@
   ];
 
   var BOOKSHELF = [
-    {t:'纳瓦尔宝典', a:'纳瓦尔·拉维坎特', reading:true},
-    {t:'无处收留：吴三桂', a:'张宏杰', link:'阅读分享第一期：吴三桂——无处收留'},
-    {t:'活法', a:'稻盛和夫', link:'《活法》读后感'},
-    {t:'埃隆马斯克传', a:'阿什利·万斯', link:'《埃隆马斯克传》读后感'},
-    {t:'了凡四训', a:'袁了凡', link:'《了凡四训》读后感'},
-    {t:'斯坦福大学人生设计课', a:'', link:'《斯坦福大学人生设计课》读后感'},
-    {t:'成为1%', a:'王易兴', link:'《成为1%》读后感'},
-    {t:'千年悖论', a:'张宏杰', link:'《千年悖论》读后感'},
-    {t:'洪武', a:'张宏杰', link:'《洪武》读后感'},
-    {t:'饥饿的盛世', a:'张宏杰', link:'《饥饿的盛世》读后感'},
-    {t:'把时间当作朋友', a:'李笑来', link:'《把时间当作朋友》读后感'},
-    {t:'新生：七年就是一辈子', a:'李笑来', link:'《新生——七年就是一辈子》读后感'},
-    {t:'个体崛起', a:'陈立飞', link:'《个体崛起》读后感'},
-    {t:'大学突围', a:'老王', link:'《大学突围》读后感'},
-    {t:'幸福的勇气', a:'岸见一郎 / 古贺史健', link:'读完《幸福的勇气》：所谓爱，其实是一场"不死不休"的冒险'},
+    {t:'The Almanack of Naval Ravikant', a:'Naval Ravikant', reading:true},
+    {t:'Principles', a:'Ray Dalio', unread:true},
+    {t:'Anything You Want', a:'Derek Sivers', unread:true},
+    {t:'The Psychology of Money', a:'Morgan Housel', unread:true},
+    {t:'Elon Musk', a:'Walter Isaacson', unread:true},
+    {t:'Tools of Titans', a:'Tim Ferriss', unread:true},
+    {t:'无处收留：吴三桂', a:'张宏杰'},
+    {t:'活法', a:'稻盛和夫'},
+    {t:'埃隆马斯克传', a:'阿什利·万斯'},
+    {t:'了凡四训', a:'袁了凡'},
+    {t:'斯坦福大学人生设计课', a:''},
+    {t:'成为1%', a:'王易兴'},
+    {t:'千年悖论', a:'张宏杰'},
+    {t:'洪武', a:'张宏杰'},
+    {t:'饥饿的盛世', a:'张宏杰'},
+    {t:'把时间当作朋友', a:'李笑来'},
+    {t:'新生：七年就是一辈子', a:'李笑来'},
+    {t:'个体崛起', a:'陈立飞'},
+    {t:'大学突围', a:'老王'},
+    {t:'幸福的勇气', a:'岸见一郎 / 古贺史健'},
     {t:'被讨厌的勇气', a:'岸见一郎 / 古贺史健'},
-    {t:'智人之上', a:'尤瓦尔·赫拉利', link:'《智人之上》：当机器开始拥有"自我"，人类的退路在哪里？'},
+    {t:'智人之上', a:'尤瓦尔·赫拉利'},
     {t:'人类简史', a:'尤瓦尔·赫拉利'},
     {t:'未来简史', a:'尤瓦尔·赫拉利'},
     {t:'黑天鹅', a:'纳西姆·塔勒布'}
@@ -2269,13 +2274,14 @@
     return '<div class="glass card" onclick="openArticleByIndex('+idx+')"><div class="idx">0'+(i+1)+'</div><h3>'+t+'</h3></div>';
   }).join('');
 
-  // 首页：书架
+  // 首页：书架（纯展示，不跳转读后感；书脊高度按标题长度动态计算，避免英文长标题溢出）
   var spineTones = ['linear-gradient(180deg,var(--i1),var(--i3))','linear-gradient(180deg,var(--i2),var(--i4))','linear-gradient(180deg,var(--i3),var(--i1))','linear-gradient(180deg,var(--i4),var(--i2))'];
   document.getElementById('bookshelf').innerHTML = BOOKSHELF.map(function(b,i){
-    var idx = b.link ? ALL_ROWS.findIndex(function(r){ return r.title === b.link; }) : -1;
-    var clickAttr = idx>=0 ? ' onclick="openArticleByIndex('+idx+')" style="cursor:pointer;background:'+spineTones[i%4]+'"' : ' style="background:'+spineTones[i%4]+'"';
-    return '<div class="spine"'+clickAttr+'>'+
+    var extra = (b.reading || b.unread) ? 30 : 0;
+    var h = Math.max(150, Math.min(280, 70 + extra + b.t.length * 13));
+    return '<div class="spine" style="background:'+spineTones[i%4]+';height:'+h+'px">'+
       (b.reading ? '<span class="spine-tag">在读</span>' : '')+
+      (b.unread ? '<span class="spine-tag spine-tag-unread">未读</span>' : '')+
       '<span class="spine-t">'+b.t+'</span>'+
       (b.a ? '<span class="spine-a">'+b.a+'</span>' : '')+
     '</div>';
