@@ -112,6 +112,7 @@ h2.h2{font-size:25px;font-weight:800;margin:6px 0 0;letter-spacing:-.01em;}
 .back:hover{color:var(--i2);}
 .art-meta{font-family:ui-monospace,monospace;font-size:12px;font-weight:700;margin-bottom:14px;background:linear-gradient(90deg,var(--i1),var(--i3));-webkit-background-clip:text;background-clip:text;color:transparent;}
 .art-title{font-size:32px;font-weight:800;line-height:1.25;margin:0 0 26px;}
+.art-page{max-width:760px;margin:0 auto;}
 .art-body{max-width:66ch;}
 .art-body p{font-size:15.5px;line-height:1.9;margin:0 0 20px;color:#3a3650;}
 .art-subhead{font-size:19px;font-weight:800;margin:36px 0 16px;padding-left:14px;border-left:3px solid var(--i2);color:var(--ink);}
@@ -121,8 +122,11 @@ h2.h2{font-size:25px;font-weight:800;margin:6px 0 0;letter-spacing:-.01em;}
 .read-progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--i1),var(--i3));transition:width .1s;}
 
 .art-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line);}
-.art-share{display:flex;gap:8px;}
-.art-icon{width:34px;height:34px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;}
+.art-share{display:flex;gap:8px;position:relative;}
+.art-icon{width:34px;height:34px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;transition:color .15s,border-color .15s;}
+.art-icon.copied{color:#22c55e;border-color:#22c55e;}
+.art-toast{position:absolute;left:0;top:-30px;font-size:11px;font-weight:700;color:#22c55e;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 12px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;transform:translateY(4px);}
+.art-toast.show{opacity:1;transform:translateY(0);}
 
 .art-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px;padding-top:20px;border-top:1px solid var(--line);}
 .art-nav-item{cursor:pointer;padding:14px 16px;border-radius:12px;background:var(--card);border:1px solid var(--line);}

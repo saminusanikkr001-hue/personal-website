@@ -2006,6 +2006,7 @@
     document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('active', v.dataset.view===name);});
     document.querySelectorAll('.navlink').forEach(function(a){a.classList.toggle('on', a.dataset.view===name);});
     document.getElementById('mainNav').classList.remove('open');
+    if(name!=='article'){ try{ history.replaceState(null, '', location.pathname+location.search); }catch(e){} }
     window.scrollTo({top:0,behavior:'smooth'});
   };
   window.toggleMenu = function(){
@@ -2052,7 +2053,7 @@
       '<div class="art-meta">'+(meta ? meta.date : '') + ' · '+row.coll+'</div>'+
       '<h1 class="art-title">'+row.title+'</h1>'+
       '<div class="art-toolbar">'+
-        '<div class="art-share"><span class="art-icon">𝕏</span><span class="art-icon" style="color:#07C160">微</span><span class="art-icon" onclick="copyArticleLink()">🔗</span></div>'+
+        '<div class="art-share"><div class="art-toast" id="linkToast">已复制链接</div><span class="art-icon" id="copyLinkBtn" onclick="copyArticleLink('+idx+')" title="复制这篇文章的链接">🔗</span></div>'+
         '<span class="art-icon" id="bookmarkBtn" onclick="toggleBookmark('+idx+')">'+(bookmarked?'★':'☆')+'</span>'+
       '</div>'+
       '<div class="art-body">'+body+'</div>'+
@@ -2061,6 +2062,7 @@
       '<div class="glass" style="text-align:center;padding:24px;margin-top:30px;max-width:180px"><img src="images/qrcode.jpg" alt="静论公众号二维码" style="width:110px;height:110px;border-radius:12px"/><p style="font-size:11px;color:var(--sub);margin-top:10px">扫码关注「静论」</p></div>';
     showView('article');
     setupReadProgress();
+    try{ history.replaceState(null, '', '#a'+idx); }catch(e){}
   };
 
   function setupReadProgress(){
@@ -2074,9 +2076,35 @@
     window.addEventListener('scroll', update);
     update();
   }
-  window.copyArticleLink = function(){
-    try{ navigator.clipboard.writeText(window.location.href); }catch(e){}
+  window.copyArticleLink = function(idx){
+    var url = location.origin + location.pathname + '#a' + idx;
+    function showFeedback(){
+      var btn = document.getElementById('copyLinkBtn');
+      var toast = document.getElementById('linkToast');
+      if(btn) btn.classList.add('copied');
+      if(toast) toast.classList.add('show');
+      setTimeout(function(){
+        if(btn) btn.classList.remove('copied');
+        if(toast) toast.classList.remove('show');
+      }, 1600);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(showFeedback).catch(function(){
+        fallbackCopy(url); showFeedback();
+      });
+    } else {
+      fallbackCopy(url); showFeedback();
+    }
   };
+  function fallbackCopy(text){
+    try{
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }catch(e){}
+  }
   function isBookmarked(title){
     try{ var list = JSON.parse(localStorage.getItem('bookmarks')||'[]'); return list.indexOf(title)!==-1; }catch(e){ return false; }
   }
@@ -2103,7 +2131,7 @@
   // 静论页：合集卡片
   document.getElementById('collection-list').innerHTML = COLLECTIONS.map(function(c,i){
     var tops=['linear-gradient(135deg,var(--i1),var(--i3))','linear-gradient(135deg,var(--i2),var(--i4))','linear-gradient(135deg,var(--i3),var(--i1))','linear-gradient(135deg,var(--i4),var(--i2))'];
-    return '<div class="glass collcard"><div class="top" style="background:'+tops[i%4]+'"></div><div class="body"><h3>'+c.name+'</h3><p>'+c.desc+' · '+c.count+'篇</p></div></div>';
+    return '<div class="glass collcard" style="cursor:pointer" onclick="filterCollection(\''+c.key+'\')"><div class="top" style="background:'+tops[i%4]+'"></div><div class="body"><h3>'+c.name+'</h3><p>'+c.desc+' · '+c.count+'篇</p></div></div>';
   }).join('');
 
   // 静论页：合集切换标签（点击筛选只看某个合集，"全部"显示全部）
@@ -2113,6 +2141,8 @@
   window.filterCollection = function(key){
     document.querySelectorAll('.coll-tab').forEach(function(t){ t.classList.toggle('on', t.dataset.key===key); });
     document.querySelectorAll('.coll-group').forEach(function(g){ g.style.display = (key==='all' || g.dataset.key===key) ? '' : 'none'; });
+    var target = key==='all' ? document.getElementById('coll-tabs') : document.querySelector('.coll-group[data-key="'+key+'"]');
+    if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
   };
 
   // 静论页：按合集分组展示，日期只显示已确认的，未知的留空
@@ -2205,5 +2235,12 @@
       });
     }, {threshold:.4});
     obs.observe(statNums[0].closest('.stats'));
+  }
+
+  // 支持文章深链：打开时地址栏形如 #a12，直接刷新/分享都能定位到那篇文章
+  var hashMatch = location.hash.match(/^#a(\d+)$/);
+  if(hashMatch){
+    var linkIdx = parseInt(hashMatch[1], 10);
+    if(ALL_ROWS[linkIdx]) openArticleByIndex(linkIdx);
   }
 })();
