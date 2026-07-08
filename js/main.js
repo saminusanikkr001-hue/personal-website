@@ -471,7 +471,7 @@
       '<div class="art-body">'+body+'</div>'+
       relatedHtml +
       navHtml +
-      '<div class="glass" style="text-align:center;padding:24px;margin-top:30px;max-width:180px"><div class="qr-placeholder" style="width:110px;height:110px"></div><p style="font-size:11px;color:var(--sub);margin-top:10px">扫码关注「静论」</p></div>';
+      '<div class="glass" style="text-align:center;padding:24px;margin-top:30px;max-width:180px"><img src="images/qrcode.jpg" alt="静论公众号二维码" style="width:110px;height:110px;border-radius:12px"/><p style="font-size:11px;color:var(--sub);margin-top:10px">扫码关注「静论」</p></div>';
     showView('article');
     setupReadProgress();
   };
