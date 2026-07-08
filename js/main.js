@@ -2201,9 +2201,16 @@
       '</div></div>' : '';
 
     var bookmarked = isBookmarked(row.title);
+    var crumbHtml = '<div class="crumb">'+
+      '<span class="crumb-link" onclick="showView(\'home\')">首页</span><span class="crumb-sep">/</span>'+
+      '<span class="crumb-link" onclick="showView(\'jinglun\');filterCollection(\'all\')">静论</span><span class="crumb-sep">/</span>'+
+      '<span class="crumb-link" onclick="showView(\'jinglun\');filterCollection(\''+row.key+'\')">'+row.coll+'</span><span class="crumb-sep">/</span>'+
+      '<span class="crumb-current">'+row.title+'</span>'+
+    '</div>';
     document.getElementById('article-slot').innerHTML =
       '<div class="read-progress"><div class="read-progress-fill" id="readProgressFill"></div></div>'+
       '<button class="back" onclick="showView(\'jinglun\')">← 返回</button>'+
+      crumbHtml+
       '<div class="art-meta">'+(meta ? meta.date : '') + ' · '+row.coll+'</div>'+
       '<h1 class="art-title">'+row.title+'</h1>'+
       '<div class="art-toolbar">'+
@@ -2418,8 +2425,14 @@
       (prev ? '<div class="art-nav-item" onclick="openYuebaoByIndex('+(idx-1)+')"><span class="lbl">← 上一月</span><span class="t">'+prev.m+' · 「'+prev.theme+'」</span></div>' : '<div></div>')+
       (next ? '<div class="art-nav-item right" onclick="openYuebaoByIndex('+(idx+1)+')"><span class="lbl">下一月 →</span><span class="t">'+next.m+' · 「'+next.theme+'」</span></div>' : '<div></div>')+
       '</div>';
+    var ybCrumb = '<div class="crumb">'+
+      '<span class="crumb-link" onclick="showView(\'home\')">首页</span><span class="crumb-sep">/</span>'+
+      '<span class="crumb-link" onclick="showView(\'yuebao\')">月报</span><span class="crumb-sep">/</span>'+
+      '<span class="crumb-current">'+m.m+'</span>'+
+    '</div>';
     document.getElementById('yuebao-slot').innerHTML =
       '<button class="back" onclick="showView(\'yuebao\')">← 返回月报列表</button>'+
+      ybCrumb+
       '<div class="art-meta">'+m.m+'</div>'+
       '<h1 class="art-title">「'+m.theme+'」</h1>'+
       '<div class="yb-swatch" style="background:'+m.color+'"></div>'+
