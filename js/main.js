@@ -1,18 +1,18 @@
-// 进站过渡：WHO AM I 字母打散动画，鼠标/手指划过全部字母后开始加载条，加载完成淡出进主站
+// 进站过渡：全屏 WHO AM I 字母打散动画，可以随意玩，玩够了点按钮才开始加载条，加载完成淡出进主站
 (function(){
   var gate = document.getElementById('introGate');
   var lettersBox = document.getElementById('introLetters');
   var hint = document.getElementById('introHint');
+  var enterBtn = document.getElementById('introEnterBtn');
   var loadWrap = document.getElementById('introLoadWrap');
   var loadFill = document.getElementById('introLoadFill');
   var loadPct = document.getElementById('introLoadPct');
   if(!gate || !lettersBox) return;
   document.body.classList.add('gate-active');
-  if('ontouchstart' in window) hint.textContent = '划动手指，把这些字母打散';
+  if('ontouchstart' in window) hint.textContent = '划动手指，尽情打散这些字母';
 
   var TEXT = 'WHO AM I';
   var letters = []; // {el, x, y}
-  var touched = new Set();
   TEXT.split('').forEach(function(ch, i){
     var span = document.createElement('span');
     if(ch === ' '){
@@ -25,7 +25,7 @@
     lettersBox.appendChild(span);
   });
 
-  var REPEL_RADIUS = 110, MAX_OFFSET = 220, done = false;
+  var REPEL_RADIUS = 160, MAX_OFFSET = 420, done = false;
   function repel(clientX, clientY){
     if(done) return;
     letters.forEach(function(L){
@@ -35,19 +35,18 @@
       var dist = Math.hypot(dx, dy) || 1;
       if(dist < REPEL_RADIUS){
         var force = (REPEL_RADIUS - dist) / REPEL_RADIUS;
-        L.x = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, L.x + (dx/dist) * force * 26));
-        L.y = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, L.y + (dy/dist) * force * 26));
+        L.x = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, L.x + (dx/dist) * force * 30));
+        L.y = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, L.y + (dy/dist) * force * 30));
         L.el.style.transform = 'translate('+L.x.toFixed(1)+'px,'+L.y.toFixed(1)+'px) rotate('+(L.x/6).toFixed(1)+'deg)';
-        touched.add(L.i);
       }
     });
-    if(touched.size >= letters.length) startLoading();
   }
 
   function startLoading(){
     if(done) return;
     done = true;
     hint.classList.add('hide');
+    enterBtn.classList.add('hide');
     loadWrap.classList.add('show');
     var pct = 0;
     var iv = setInterval(function(){
@@ -69,6 +68,7 @@
     if(e.touches && e.touches[0]){ repel(e.touches[0].clientX, e.touches[0].clientY); }
     e.preventDefault();
   }, {passive:false});
+  enterBtn.addEventListener('click', startLoading);
 })();
 
 (function(){
