@@ -1,3 +1,76 @@
+// 进站过渡：WHO AM I 字母打散动画，鼠标/手指划过全部字母后开始加载条，加载完成淡出进主站
+(function(){
+  var gate = document.getElementById('introGate');
+  var lettersBox = document.getElementById('introLetters');
+  var hint = document.getElementById('introHint');
+  var loadWrap = document.getElementById('introLoadWrap');
+  var loadFill = document.getElementById('introLoadFill');
+  var loadPct = document.getElementById('introLoadPct');
+  if(!gate || !lettersBox) return;
+  document.body.classList.add('gate-active');
+  if('ontouchstart' in window) hint.textContent = '划动手指，把这些字母打散';
+
+  var TEXT = 'WHO AM I';
+  var letters = []; // {el, x, y}
+  var touched = new Set();
+  TEXT.split('').forEach(function(ch, i){
+    var span = document.createElement('span');
+    if(ch === ' '){
+      span.className = 'intro-letter space';
+    } else {
+      span.className = 'intro-letter';
+      span.textContent = ch;
+      letters.push({el: span, x: 0, y: 0, i: i});
+    }
+    lettersBox.appendChild(span);
+  });
+
+  var REPEL_RADIUS = 110, MAX_OFFSET = 220, done = false;
+  function repel(clientX, clientY){
+    if(done) return;
+    letters.forEach(function(L){
+      var rect = L.el.getBoundingClientRect();
+      var cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
+      var dx = cx - clientX, dy = cy - clientY;
+      var dist = Math.hypot(dx, dy) || 1;
+      if(dist < REPEL_RADIUS){
+        var force = (REPEL_RADIUS - dist) / REPEL_RADIUS;
+        L.x = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, L.x + (dx/dist) * force * 26));
+        L.y = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, L.y + (dy/dist) * force * 26));
+        L.el.style.transform = 'translate('+L.x.toFixed(1)+'px,'+L.y.toFixed(1)+'px) rotate('+(L.x/6).toFixed(1)+'deg)';
+        touched.add(L.i);
+      }
+    });
+    if(touched.size >= letters.length) startLoading();
+  }
+
+  function startLoading(){
+    if(done) return;
+    done = true;
+    hint.classList.add('hide');
+    loadWrap.classList.add('show');
+    var pct = 0;
+    var iv = setInterval(function(){
+      pct += 2 + Math.random()*4;
+      if(pct >= 100){ pct = 100; clearInterval(iv); setTimeout(finishGate, 260); }
+      loadFill.style.width = pct + '%';
+      loadPct.textContent = Math.round(pct) + '%';
+    }, 40);
+  }
+
+  function finishGate(){
+    gate.classList.add('gone');
+    document.body.classList.remove('gate-active');
+    setTimeout(function(){ gate.style.display = 'none'; }, 650);
+  }
+
+  gate.addEventListener('mousemove', function(e){ repel(e.clientX, e.clientY); });
+  gate.addEventListener('touchmove', function(e){
+    if(e.touches && e.touches[0]){ repel(e.touches[0].clientX, e.touches[0].clientY); }
+    e.preventDefault();
+  }, {passive:false});
+})();
+
 (function(){
   var COLLECTIONS = [
     {key:'qxj', name:'清醒纪', desc:'认知与元认知', count:19},
