@@ -17,13 +17,14 @@ body{
 /* animated mesh background */
 .mesh{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
 .mesh .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.35;animation:drift 18s ease-in-out infinite;}
+:root[data-theme="dark"] .mesh .blob{opacity:.55;filter:blur(90px);}
 .mesh .b1{width:480px;height:480px;background:var(--i1);top:-140px;left:-100px;}
 .mesh .b2{width:420px;height:420px;background:var(--i3);top:100px;right:-140px;animation-delay:-6s;}
 .mesh .b3{width:400px;height:400px;background:var(--i4);bottom:-160px;left:20%;animation-delay:-12s;}
 @keyframes drift{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(30px,-40px) scale(1.08);}}
 
 .wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 30px 100px;}
-header.top{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:18px 30px;background:rgba(250,250,255,.72);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);}
+header.top{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:18px 30px;background:var(--card);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);}
 .mark{font-weight:800;font-size:15px;letter-spacing:.01em;}
 .mark span{background:linear-gradient(90deg,var(--i1),var(--i3));-webkit-background-clip:text;background-clip:text;color:transparent;}
 nav.nav{display:flex;gap:24px;}
@@ -114,7 +115,7 @@ h2.h2{font-size:25px;font-weight:800;margin:6px 0 0;letter-spacing:-.01em;}
 .art-title{font-size:32px;font-weight:800;line-height:1.25;margin:0 0 26px;}
 .art-page{max-width:760px;margin:0 auto;}
 .art-body{max-width:66ch;}
-.art-body p{font-size:15.5px;line-height:1.9;margin:0 0 20px;color:#3a3650;}
+.art-body p{font-size:15.5px;line-height:1.9;margin:0 0 20px;color:var(--ink);}
 .art-subhead{font-size:19px;font-weight:800;margin:36px 0 16px;padding-left:14px;border-left:3px solid var(--i2);color:var(--ink);}
 .art-pullquote{font-size:18px;font-weight:700;font-style:italic;margin:24px 0;padding:16px 20px;background:rgba(99,102,241,.06);border-left:3px solid var(--i2);color:var(--ink);}
 
