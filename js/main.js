@@ -2446,10 +2446,13 @@
 
   // 现状页：来自任务系统导出快照（2026-07-07）
   var STATUS_LABELS = [
-    {l:'老友记', v:'S02E01'},
     {l:'在读', v:'《纳瓦尔宝典》第5篇'},
     {l:'静论写作', v:'尚未设置合集进度'}
   ];
+  var SHOW_PROGRESS = {
+    title:'老友记 Friends', season:2, episode:1,
+    seasons:[24,24,25,24,24,25,24,24,24,18]
+  };
   var STATUS_BARS = [
     {l:'数学分析', done:9, total:9},
     {l:'金融大数据', done:5, total:5},
@@ -2466,6 +2469,24 @@
     var pct = s.total ? Math.round(s.done/s.total*100) : 0;
     return '<div class="pv1-row"><div class="pv1-top"><span>'+s.l+'</span><span class="grad-text" style="font-weight:800">'+s.done+'/'+s.total+'</span></div><div class="pv1-track"><div class="pv1-fill" style="width:'+pct+'%"></div></div></div>';
   }).join('');
+
+  // 现状页：追剧进度条（老友记，按集数换算）
+  var showEl = document.getElementById('showProgress');
+  if(showEl){
+    var sp = SHOW_PROGRESS;
+    var totalEp = sp.seasons.reduce(function(a,b){return a+b;}, 0);
+    var watchedEp = sp.seasons.slice(0, sp.season-1).reduce(function(a,b){return a+b;}, 0) + sp.episode;
+    var pct = Math.round(watchedEp/totalEp*100);
+    var seasonTicks = sp.seasons.map(function(total,si){
+      var seasonNum = si+1;
+      var fillPct = seasonNum < sp.season ? 100 : (seasonNum === sp.season ? Math.round(sp.episode/total*100) : 0);
+      return '<div class="show-tick" title="S0'+seasonNum+' · '+total+'集"><div class="show-tick-fill" style="height:'+fillPct+'%"></div></div>';
+    }).join('');
+    showEl.innerHTML =
+      '<div class="pv1-top"><span>'+sp.title+' · S0'+sp.season+'E0'+sp.episode+'</span><span class="grad-text" style="font-weight:800">'+watchedEp+'/'+totalEp+' 集</span></div>'+
+      '<div class="pv1-track"><div class="pv1-fill" style="width:'+pct+'%"></div></div>'+
+      '<div class="show-seasons">'+seasonTicks+'</div>';
+  }
 
   // 现状页：执行记录热力图（近30天，强度拉满）
   var heatmapEl = document.getElementById('heatmapGrid');
