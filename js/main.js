@@ -11,21 +11,23 @@
   document.body.classList.add('gate-active');
   if('ontouchstart' in window) hint.textContent = '划动手指，尽情打散这些字母';
 
-  var TEXT = 'WHO AM I';
+  var TEXT = 'WHEN SOMETHING IS IMPORTANT ENOUGH YOU DO IT EVEN IF THE ODDS ARE NOT IN YOUR FAVOR';
   var letters = []; // {el, x, y}
-  TEXT.split('').forEach(function(ch, i){
-    var span = document.createElement('span');
-    if(ch === ' '){
-      span.className = 'intro-letter space';
-    } else {
+  // 按单词分组，每个单词内部不换行，避免拆散成两半跨行
+  TEXT.split(' ').forEach(function(word){
+    var wordSpan = document.createElement('span');
+    wordSpan.className = 'intro-word';
+    word.split('').forEach(function(ch){
+      var span = document.createElement('span');
       span.className = 'intro-letter';
       span.textContent = ch;
-      letters.push({el: span, x: 0, y: 0, i: i});
-    }
-    lettersBox.appendChild(span);
+      letters.push({el: span, x: 0, y: 0});
+      wordSpan.appendChild(span);
+    });
+    lettersBox.appendChild(wordSpan);
   });
 
-  var REPEL_RADIUS = 160, MAX_OFFSET = 420, done = false;
+  var REPEL_RADIUS = 85, MAX_OFFSET = 170, done = false;
   function repel(clientX, clientY){
     if(done) return;
     letters.forEach(function(L){
