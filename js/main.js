@@ -2341,13 +2341,13 @@
     {l:'静论写作', v:'尚未设置合集进度'}
   ];
   var STATUS_BARS = [
-    {l:'数学分析', done:0, total:9},
-    {l:'金融大数据', done:0, total:5},
-    {l:'金融科技导论 · 练习', done:2, total:6},
-    {l:'英语四级', done:0, total:71}
+    {l:'数学分析', done:9, total:9},
+    {l:'金融大数据', done:5, total:5},
+    {l:'金融科技导论 · 练习', done:6, total:6},
+    {l:'英语四级', done:71, total:71}
   ];
   var statSyncEl = document.getElementById('status-sync-time');
-  if(statSyncEl) statSyncEl.textContent = '数据同步于 2026-07-07（手动，非实时）';
+  if(statSyncEl) statSyncEl.textContent = '数据同步于 2026-07-08（手动，非实时）· 期末已结束，四门课程全部完成';
   document.getElementById('status-labels').innerHTML = STATUS_LABELS.map(function(s){
     return '<div class="grow"><span style="font-weight:700;font-size:13px">'+s.l+'</span><span style="font-size:12.5px;color:var(--sub)">'+s.v+'</span></div>';
   }).join('');
