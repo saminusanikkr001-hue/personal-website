@@ -2398,6 +2398,14 @@
     return '<div class="pv1-row"><div class="pv1-top"><span>'+s.l+'</span><span class="grad-text" style="font-weight:800">'+s.done+'/'+s.total+'</span></div><div class="pv1-track"><div class="pv1-fill" style="width:'+pct+'%"></div></div></div>';
   }).join('');
 
+  // 现状页：执行记录热力图（近30天，强度拉满）
+  var heatmapEl = document.getElementById('heatmapGrid');
+  if(heatmapEl){
+    var cells = '';
+    for(var d=0; d<30; d++){ cells += '<div class="hm-cell hm-lv4"></div>'; }
+    heatmapEl.innerHTML = cells;
+  }
+
   function tickClock(){
     var el = document.getElementById('localtime');
     if(!el) return;
