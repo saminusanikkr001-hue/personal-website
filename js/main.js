@@ -2475,6 +2475,16 @@
     title:'老友记 Friends', season:2, episode:1,
     seasons:[24,24,25,24,24,25,24,24,24,18]
   };
+  var BADGES = [
+    {ic:'🖋️', t:'静论创办人', s:'74篇原创文章'},
+    {ic:'📰', t:'母校转载', s:'文章登上官方公众号'},
+    {ic:'📚', t:'大学生编辑部', s:'正式成员'},
+    {ic:'💌', t:'《致班任》', s:'走进4个原创圈层'},
+    {ic:'🧭', t:'原则库137条', s:'持续迭代中'},
+    {ic:'⚡', t:'三套自我系统', s:'10天独立搭建'},
+    {ic:'✍️', t:'语文133.5', s:'高考单科高分'},
+    {ic:'🎯', t:'期末全勤', s:'四门课程满进度'}
+  ];
   var STATUS_BARS = [
     {l:'数学分析', done:9, total:9},
     {l:'金融大数据', done:5, total:5},
@@ -2516,6 +2526,14 @@
     var cells = '';
     for(var d=0; d<30; d++){ cells += '<div class="hm-cell hm-lv4"></div>'; }
     heatmapEl.innerHTML = cells;
+  }
+
+  // 现状页：成就标签
+  var badgeEl = document.getElementById('badgeGrid');
+  if(badgeEl){
+    badgeEl.innerHTML = BADGES.map(function(b){
+      return '<div class="glass badge-card"><span class="badge-ic">'+b.ic+'</span><span class="badge-t">'+b.t+'</span><span class="badge-s">'+b.s+'</span></div>';
+    }).join('');
   }
 
   function tickClock(){
