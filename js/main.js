@@ -2254,6 +2254,49 @@
   function isBookmarked(title){
     try{ var list = JSON.parse(localStorage.getItem('bookmarks')||'[]'); return list.indexOf(title)!==-1; }catch(e){ return false; }
   }
+
+  // 搜索面板：按标题匹配全部74篇静论文章
+  var searchOverlay = document.getElementById('searchOverlay');
+  var searchInput = document.getElementById('searchInput');
+  var searchResults = document.getElementById('searchResults');
+  window.openSearch = function(){
+    searchOverlay.classList.add('open');
+    searchInput.value = '';
+    renderSearch('');
+    setTimeout(function(){ searchInput.focus(); }, 50);
+  };
+  window.closeSearch = function(){
+    searchOverlay.classList.remove('open');
+  };
+  function renderSearch(q){
+    q = q.trim().toLowerCase();
+    if(!q){
+      searchResults.innerHTML = '<div class="sr-empty">输入标题关键词试试，比如"月报"或"AI"</div>';
+      return;
+    }
+    var matches = ALL_ROWS.map(function(r,i){ return {r:r, i:i}; }).filter(function(x){
+      return x.r.title.toLowerCase().indexOf(q) !== -1;
+    });
+    if(!matches.length){
+      searchResults.innerHTML = '<div class="sr-empty">没有找到包含"'+q+'"的文章</div>';
+      return;
+    }
+    searchResults.innerHTML = matches.slice(0,20).map(function(x){
+      var meta = ARTICLES_WITH_BODY[x.r.title];
+      var dateStr = meta ? meta.date : '';
+      return '<div class="sr-item" onclick="openArticleByIndex('+x.i+');closeSearch();"><span class="sr-t">'+x.r.title+'</span><span class="sr-meta">'+x.r.coll+(dateStr?' · '+dateStr:'')+'</span></div>';
+    }).join('');
+  }
+  if(searchInput){
+    searchInput.addEventListener('input', function(){ renderSearch(searchInput.value); });
+  }
+  if(searchOverlay){
+    searchOverlay.addEventListener('click', function(e){ if(e.target === searchOverlay) closeSearch(); });
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeSearch();
+    if((e.ctrlKey || e.metaKey) && e.key === 'k'){ e.preventDefault(); openSearch(); }
+  });
   window.toggleBookmark = function(idx){
     var row = ALL_ROWS[idx];
     if(!row) return;

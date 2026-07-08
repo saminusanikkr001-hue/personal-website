@@ -32,6 +32,7 @@
       <a class="navlink" data-view="status" onclick="showView('status')">现状</a>
       <a class="navlink" data-view="contact" onclick="showView('contact')">联系</a>
     </nav>
+    <button class="search-btn" onclick="openSearch()" aria-label="搜索" title="搜索 (Ctrl+K)">🔍</button>
     <div class="theme-toggle" id="themeToggle">
       <span class="on" data-theme="light" onclick="setTheme('light')">Light</span>
       <span data-theme="dark" onclick="setTheme('dark')">Dark</span>
@@ -39,6 +40,17 @@
     <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="菜单">☰</button>
   </div>
 </header>
+
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-panel glass">
+    <div class="search-inputrow">
+      <span class="search-ic">🔍</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索静论文章标题…" autocomplete="off"/>
+      <button class="search-close" onclick="closeSearch()" aria-label="关闭">✕</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
 
 <div class="wrap">
   <div class="view active" data-view="home">
