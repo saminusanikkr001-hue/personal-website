@@ -2059,17 +2059,28 @@
   };
 
   var YUEBAO_MONTHS = [
-    {m:'2025-08', theme:'备齐', s:'暑假冲刺小组答辩，读完12本书约236万字，为开学做好准备'},
-    {m:'2025-09', theme:'新生', s:'到大连报道入学，军训季，第一次经历的事情很多'},
-    {m:'2025-10', theme:'自愈', s:'国庆回家团聚，一个人慢慢走出低谷'},
-    {m:'2025-11', theme:'独行', s:'一个人探索大连，逃离校园找到自己的自习节奏'},
-    {m:'2025-12', theme:'铺开', s:'和室友们从无到有，把宿舍生活搭建起来'},
-    {m:'2026-01', theme:'登机牌', s:'一个人走完整个寒假，把真实行程做成了登机牌形式的记录'},
-    {m:'2026-02', theme:'黑天鹅·眉批', s:'意料之外的事分量比计划里的更重，开始学编程'},
-    {m:'2026-03', theme:'搭', s:'连续用专栏概念写了14篇公众号文章，读完《智人之上》，开始用AI Agent'},
-    {m:'2026-04', theme:'赴', s:'19岁的第一个月，很多"想到就做"的事情落了地'},
-    {m:'2026-05', theme:'赠', s:'五一独自去长春待了十二小时，母亲节做了一份网页送给妈妈'},
-    {m:'2026-06', theme:'少年游', s:'毕业季，月报/投资/消费三套系统相隔十天独立建立，原则库从82条长到135条'}
+    {m:'2025-08', theme:'备齐', color:'#b8954a', s:'暑假冲刺小组答辩，读完12本书约236万字，为开学做好准备',
+      why:'这个月的每件事都是在为9月"配齐"——训练营、阅读、体能，一样样准备好再出发。'},
+    {m:'2025-09', theme:'新生', color:'#7ba05b', s:'到大连报道入学，军训季，第一次经历的事情很多',
+      why:'像一株刚冒头的嫩芽，这个月几乎每件事都是第一次：军训、新同学、新城市。'},
+    {m:'2025-10', theme:'自愈', color:'#a36b4e', s:'国庆回家团聚，一个人慢慢走出低谷',
+      why:'国庆假期之后，状态需要靠自己一点点调回来，"自愈"是这个过程的诚实说法。'},
+    {m:'2025-11', theme:'独行', color:'#6e5868', s:'一个人探索大连，逃离校园找到自己的自习节奏',
+      why:'开始一个人在这座城市走出自己的节奏，不依赖别人的安排也能把日子过顺。'},
+    {m:'2025-12', theme:'铺开', color:'#c97a4a', s:'和室友们从无到有，把宿舍生活搭建起来',
+      why:'从零开始，和室友一起把日常一点点铺展开来，宿舍慢慢有了生活的样子。'},
+    {m:'2026-01', theme:'登机牌', color:'#b5482f', s:'一个人走完整个寒假，把真实行程做成了登机牌形式的记录',
+      why:'把假期的行程做成了登机牌的样式去记录，像给自己每一段旅程都发了一张票根。'},
+    {m:'2026-02', theme:'黑天鹅·眉批', color:'#9c3b30', s:'意料之外的事分量比计划里的更重，开始学编程',
+      why:'这个月计划外的事分量比计划内的更重，"黑天鹅"记的是意外，"眉批"是旁注式的复盘。'},
+    {m:'2026-03', theme:'搭', color:'#8860d0', s:'连续用专栏概念写了14篇公众号文章，读完《智人之上》，开始用AI Agent',
+      why:'这个月开始大量"搭"东西——文章、阅读体系、和AI一起做事的方式，都是从无到有搭出来的。'},
+    {m:'2026-04', theme:'赴', color:'#d9754e', s:'19岁的第一个月，很多"想到就做"的事情落了地',
+      why:'很多"想到就做"的事情落了地，"赴"是那股想到就奔着去做的劲头。'},
+    {m:'2026-05', theme:'赠', color:'#a06c20', s:'五一独自去长春待了十二小时，母亲节做了一份网页送给妈妈',
+      why:'这个月做了两件"送给别人"的事，"赠"字记的是这份心意本身。'},
+    {m:'2026-06', theme:'少年游', color:'#8aaeb8', s:'毕业季，月报/投资/消费三套系统相隔十天独立建立，原则库从82条长到135条',
+      why:'借一句词牌名，形容这个阶段轻装上阵、边走边搭系统的状态。'}
   ];
 
   var PRINCIPLE_CATS = [
@@ -2232,9 +2243,35 @@
   }).join('');
 
   // 月报页
-  document.getElementById('yuebao-list').innerHTML = YUEBAO_MONTHS.map(function(m){
-    return '<div class="glass" style="padding:16px 20px;margin-bottom:12px"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><h3 style="font-size:14.5px;margin:0;font-weight:800">'+m.m+' · 「'+m.theme+'」</h3></div><p style="font-size:12.5px;color:var(--sub);margin:0;line-height:1.6">'+m.s+'</p></div>';
+  document.getElementById('yuebao-list').innerHTML = YUEBAO_MONTHS.map(function(m,idx){
+    return '<div class="glass yb-row" style="padding:16px 20px;margin-bottom:12px;cursor:pointer" onclick="openYuebaoByIndex('+idx+')">'+
+      '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">'+
+        '<h3 style="font-size:14.5px;margin:0;font-weight:800"><span class="yb-dot" style="background:'+m.color+'"></span>'+m.m+' · 「'+m.theme+'」</h3>'+
+        '<span style="font-size:11px;color:var(--sub)">查看 →</span>'+
+      '</div>'+
+      '<p style="font-size:12.5px;color:var(--sub);margin:0;line-height:1.6">'+m.s+'</p></div>';
   }).join('');
+
+  window.openYuebaoByIndex = function(idx){
+    var m = YUEBAO_MONTHS[idx];
+    if(!m) return;
+    var prev = YUEBAO_MONTHS[idx-1], next = YUEBAO_MONTHS[idx+1];
+    var navHtml = '<div class="art-nav">'+
+      (prev ? '<div class="art-nav-item" onclick="openYuebaoByIndex('+(idx-1)+')"><span class="lbl">← 上一月</span><span class="t">'+prev.m+' · 「'+prev.theme+'」</span></div>' : '<div></div>')+
+      (next ? '<div class="art-nav-item right" onclick="openYuebaoByIndex('+(idx+1)+')"><span class="lbl">下一月 →</span><span class="t">'+next.m+' · 「'+next.theme+'」</span></div>' : '<div></div>')+
+      '</div>';
+    document.getElementById('yuebao-slot').innerHTML =
+      '<button class="back" onclick="showView(\'yuebao\')">← 返回月报列表</button>'+
+      '<div class="art-meta">'+m.m+'</div>'+
+      '<h1 class="art-title">「'+m.theme+'」</h1>'+
+      '<div class="yb-swatch" style="background:'+m.color+'"></div>'+
+      '<div class="art-body">'+
+        '<p><b>这个月做了什么：</b>'+m.s+'</p>'+
+        '<p><b>为什么是这个关键词：</b>'+m.why+'</p>'+
+      '</div>'+
+      navHtml;
+    showView('yuebao-detail');
+  };
 
   // 原则库页
   document.getElementById('principle-list').innerHTML = PRINCIPLE_CATS.map(function(c){
