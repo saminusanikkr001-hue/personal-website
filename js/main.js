@@ -39,7 +39,7 @@
       '一种等待，是不可饶恕的错失。',
       '19岁的我，为了去长春诉说很深的思念，选择了立刻出发；清明假期，为了回家多陪陪姥姥姥爷，我宁愿从沈阳中转飞回呼伦贝尔。',
       '我极其清醒地知道，有些爱和勇气是有保质期的，我怕极了"子欲养而亲不待"。趁着还能走很长的路，趁着那股不顾一切的心气还在，立刻去做。',
-      '我在月度报告里写过："少年心气，是不可再生之物。"',
+      '>>我在月度报告里写过："少年心气，是不可再生之物。"',
       '因为我今天在19岁做到了，我20岁的时候，那份锐利和果决才会依然鲜活。',
       '但另一种等待，是必须承受的积累。',
       '能力的提升、资本的积累、知识的沉淀——这些绝非一朝一夕能完成。它是悬在头顶的星辰，指导着我每天脚踏实地地靠近。这才是值得等待的"刚需"。',
@@ -79,7 +79,7 @@
       '我选择真诚，是因为这个创造价值的过程本身就能给我带来内在的愉悦。至于对方能不能接得住，那是对方的课题，与我无关。把真诚当成一种筛选机制，配不上的自然会被过滤掉。只要我不觉得这是损失，就没有人能伤害到我。',
       '你的价值观好不好，不需要向任何人证明。当你的生活开始呈现出秩序感，当你不再因别人的眼神而犹疑，当你感受到那种持续增长且不费力的松弛感——世界已经在替你结算了。',
       '命运是结果，选择是路径，价值观是地图。',
-      '地图画清楚了，路走起来不一定更轻松，但不会走丢。'
+      '>>地图画清楚了，路走起来不一定更轻松，但不会走丢。'
     ]},
     '这些根，在你那里': {collection:'nxwn', date:'2026-05-10', body:[
       '不知道是不是这代人的通病——',
@@ -157,14 +157,71 @@
     var meta = ARTICLES_WITH_BODY[row.title];
     var body = meta ? meta.body.map(function(p){
       if(p.indexOf('##')===0) return '<h3 class="art-subhead">'+p.slice(2)+'</h3>';
+      if(p.indexOf('>>')===0) return '<div class="art-pullquote">'+p.slice(2)+'</div>';
       return '<p>'+p+'</p>';
     }).join('') : '<p style="color:var(--sub)">内容整理中，稍后补上正文。</p>';
+
+    // 同合集里找上一篇/下一篇
+    var sameColl = ALL_ROWS.map(function(r,i){return {r:r,i:i};}).filter(function(x){return x.r.key===row.key;});
+    var posInColl = sameColl.findIndex(function(x){return x.i===idx;});
+    var prevItem = sameColl[posInColl-1], nextItem = sameColl[posInColl+1];
+    var navHtml = '<div class="art-nav">'+
+      (prevItem ? '<div class="art-nav-item" onclick="openArticleByIndex('+prevItem.i+')"><span class="lbl">← 上一篇</span><span class="t">'+prevItem.r.title+'</span></div>' : '<div></div>')+
+      (nextItem ? '<div class="art-nav-item right" onclick="openArticleByIndex('+nextItem.i+')"><span class="lbl">下一篇 →</span><span class="t">'+nextItem.r.title+'</span></div>' : '<div></div>')+
+      '</div>';
+
+    // 相关文章：同合集里随机挑2篇（排除自己）
+    var related = sameColl.filter(function(x){return x.i!==idx;}).sort(function(){return Math.random()-.5;}).slice(0,2);
+    var relatedHtml = related.length ? '<div class="art-related"><div class="art-related-lbl">相关文章 · '+row.coll+'</div><div class="cardgrid" style="grid-template-columns:1fr 1fr">'+
+      related.map(function(x){return '<div class="glass" style="padding:16px;cursor:pointer" onclick="openArticleByIndex('+x.i+')"><h4 style="font-size:13px;margin:0;font-weight:700">'+x.r.title+'</h4></div>';}).join('')+
+      '</div></div>' : '';
+
+    var bookmarked = isBookmarked(row.title);
     document.getElementById('article-slot').innerHTML =
+      '<div class="read-progress"><div class="read-progress-fill" id="readProgressFill"></div></div>'+
       '<button class="back" onclick="showView(\'jinglun\')">← 返回</button>'+
       '<div class="art-meta">'+(meta ? meta.date : '') + ' · '+row.coll+'</div>'+
       '<h1 class="art-title">'+row.title+'</h1>'+
-      '<div class="art-body">'+body+'</div>';
+      '<div class="art-toolbar">'+
+        '<div class="art-share"><span class="art-icon">𝕏</span><span class="art-icon" style="color:#07C160">微</span><span class="art-icon" onclick="copyArticleLink()">🔗</span></div>'+
+        '<span class="art-icon" id="bookmarkBtn" onclick="toggleBookmark('+idx+')">'+(bookmarked?'★':'☆')+'</span>'+
+      '</div>'+
+      '<div class="art-body">'+body+'</div>'+
+      relatedHtml +
+      navHtml +
+      '<div class="glass" style="text-align:center;padding:24px;margin-top:30px;max-width:180px"><div class="qr-placeholder" style="width:110px;height:110px"></div><p style="font-size:11px;color:var(--sub);margin-top:10px">扫码关注「静论」</p></div>';
     showView('article');
+    setupReadProgress();
+  };
+
+  function setupReadProgress(){
+    var fill = document.getElementById('readProgressFill');
+    if(!fill) return;
+    function update(){
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = h>0 ? Math.min(100, Math.round(window.scrollY/h*100)) : 0;
+      fill.style.width = pct+'%';
+    }
+    window.addEventListener('scroll', update);
+    update();
+  }
+  window.copyArticleLink = function(){
+    try{ navigator.clipboard.writeText(window.location.href); }catch(e){}
+  };
+  function isBookmarked(title){
+    try{ var list = JSON.parse(localStorage.getItem('bookmarks')||'[]'); return list.indexOf(title)!==-1; }catch(e){ return false; }
+  }
+  window.toggleBookmark = function(idx){
+    var row = ALL_ROWS[idx];
+    if(!row) return;
+    var title = row.title;
+    var list = [];
+    try{ list = JSON.parse(localStorage.getItem('bookmarks')||'[]'); }catch(e){}
+    var i = list.indexOf(title);
+    if(i===-1) list.push(title); else list.splice(i,1);
+    try{ localStorage.setItem('bookmarks', JSON.stringify(list)); }catch(e){}
+    var btn = document.getElementById('bookmarkBtn');
+    if(btn) btn.textContent = isBookmarked(title) ? '★' : '☆';
   };
 
   // 首页：最近几篇（取自清醒纪最新3篇）
@@ -180,6 +237,15 @@
     return '<div class="glass collcard"><div class="top" style="background:'+tops[i%4]+'"></div><div class="body"><h3>'+c.name+'</h3><p>'+c.desc+' · '+c.count+'篇</p></div></div>';
   }).join('');
 
+  // 静论页：合集切换标签（点击筛选只看某个合集，"全部"显示全部）
+  document.getElementById('coll-tabs').innerHTML =
+    '<div class="coll-tab on" data-key="all" onclick="filterCollection(\'all\')">全部<sup>'+ALL_ROWS.length+'</sup></div>' +
+    COLLECTIONS.map(function(c){ return '<div class="coll-tab" data-key="'+c.key+'" onclick="filterCollection(\''+c.key+'\')">'+c.name+'<sup>'+c.count+'</sup></div>'; }).join('');
+  window.filterCollection = function(key){
+    document.querySelectorAll('.coll-tab').forEach(function(t){ t.classList.toggle('on', t.dataset.key===key); });
+    document.querySelectorAll('.coll-group').forEach(function(g){ g.style.display = (key==='all' || g.dataset.key===key) ? '' : 'none'; });
+  };
+
   // 静论页：按合集分组展示，日期只显示已确认的，未知的留空
   document.getElementById('article-by-collection').innerHTML = COLLECTIONS.map(function(c){
     var rowsHtml = ALL_ROWS.map(function(r,idx){
@@ -188,7 +254,7 @@
       var dateStr = meta ? meta.date : '';
       return '<div class="arow" onclick="openArticleByIndex('+idx+')"><span class="t">'+r.title+'</span><span class="d">'+dateStr+'</span></div>';
     }).join('');
-    return '<div class="coll-group"><div class="coll-group-head"><h3>'+c.name+'</h3><span>'+c.count+'篇</span></div><div class="glass" style="padding:4px">'+rowsHtml+'</div></div>';
+    return '<div class="coll-group" data-key="'+c.key+'"><div class="coll-group-head"><h3>'+c.name+'</h3><span>'+c.count+'篇</span></div><div class="glass" style="padding:4px">'+rowsHtml+'</div></div>';
   }).join('');
 
   // 月报页
