@@ -2348,8 +2348,9 @@
   ];
   var statSyncEl = document.getElementById('status-sync-time');
   if(statSyncEl) statSyncEl.textContent = '数据同步于 2026-07-08（手动，非实时）· 期末已结束，四门课程全部完成';
-  document.getElementById('status-labels').innerHTML = STATUS_LABELS.map(function(s){
-    return '<div class="grow"><span style="font-weight:700;font-size:13px">'+s.l+'</span><span style="font-size:12.5px;color:var(--sub)">'+s.v+'</span></div>';
+  document.getElementById('status-labels').innerHTML = STATUS_LABELS.map(function(s,i){
+    var tops=['linear-gradient(90deg,var(--i1),var(--i3))','linear-gradient(90deg,var(--i2),var(--i4))','linear-gradient(90deg,var(--i3),var(--i1))','linear-gradient(90deg,var(--i4),var(--i2))'];
+    return '<div class="glass status-card" style="--acc:'+tops[i%4]+'"><span class="st-l">'+s.l+'</span><span class="st-v">'+s.v+'</span></div>';
   }).join('');
   document.getElementById('status-bars').innerHTML = STATUS_BARS.map(function(s){
     var pct = s.total ? Math.round(s.done/s.total*100) : 0;
