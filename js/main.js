@@ -2469,7 +2469,7 @@
   // 现状页：来自任务系统导出快照（2026-07-07）
   var STATUS_LABELS = [
     {l:'在读', v:'《纳瓦尔宝典》第5篇'},
-    {l:'静论写作', v:'尚未设置合集进度'}
+    {l:'静论写作', v:'持续更新中'}
   ];
   var SHOW_PROGRESS = {
     title:'老友记 Friends', season:2, episode:1,
