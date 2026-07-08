@@ -234,6 +234,15 @@ h2.h2{font-size:25px;font-weight:800;margin:6px 0 0;letter-spacing:-.01em;}
   .jphase{font-size:9px;}
 }
 
+.shelf{display:flex;gap:8px;overflow-x:auto;padding:8px 4px 20px;scrollbar-width:thin;}
+.spine{flex-shrink:0;width:44px;height:190px;border-radius:6px 6px 3px 3px;position:relative;box-shadow:0 6px 16px rgba(0,0,0,.16),inset 0 0 0 1px rgba(255,255,255,.12);transition:transform .15s,box-shadow .15s;display:flex;flex-direction:column;align-items:center;padding:14px 0;}
+.spine:nth-child(3n+1){height:210px;}
+.spine:nth-child(5n+2){height:172px;}
+.spine:hover{transform:translateY(-6px);box-shadow:0 14px 26px rgba(0,0,0,.22),inset 0 0 0 1px rgba(255,255,255,.16);}
+.spine-t{writing-mode:vertical-rl;text-orientation:mixed;font-size:13px;font-weight:800;color:#fff;letter-spacing:.03em;text-shadow:0 1px 3px rgba(0,0,0,.25);flex:1;display:flex;align-items:center;}
+.spine-a{writing-mode:vertical-rl;font-size:9.5px;color:rgba(255,255,255,.75);margin-top:8px;letter-spacing:.02em;}
+.spine-tag{writing-mode:vertical-rl;font-size:9px;font-weight:700;color:#fff;background:rgba(0,0,0,.28);padding:3px 4px;border-radius:4px;margin-bottom:8px;letter-spacing:.05em;}
+
 .status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
 .status-card{padding:20px;position:relative;overflow:hidden;}
 .status-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--acc);}

@@ -2094,6 +2094,29 @@
       colorWhy:'水蓝，蓝图的蓝，不是大海也不是天空，是建筑师工作台上白线打在蓝底上的那种冷静、精确、结构感。'}
   ];
 
+  var BOOKSHELF = [
+    {t:'纳瓦尔宝典', a:'纳瓦尔·拉维坎特', reading:true},
+    {t:'无处收留：吴三桂', a:'张宏杰', link:'阅读分享第一期：吴三桂——无处收留'},
+    {t:'活法', a:'稻盛和夫', link:'《活法》读后感'},
+    {t:'埃隆马斯克传', a:'阿什利·万斯', link:'《埃隆马斯克传》读后感'},
+    {t:'了凡四训', a:'袁了凡', link:'《了凡四训》读后感'},
+    {t:'斯坦福大学人生设计课', a:'', link:'《斯坦福大学人生设计课》读后感'},
+    {t:'成为1%', a:'王易兴', link:'《成为1%》读后感'},
+    {t:'千年悖论', a:'张宏杰', link:'《千年悖论》读后感'},
+    {t:'洪武', a:'张宏杰', link:'《洪武》读后感'},
+    {t:'饥饿的盛世', a:'张宏杰', link:'《饥饿的盛世》读后感'},
+    {t:'把时间当作朋友', a:'李笑来', link:'《把时间当作朋友》读后感'},
+    {t:'新生：七年就是一辈子', a:'李笑来', link:'《新生——七年就是一辈子》读后感'},
+    {t:'个体崛起', a:'陈立飞', link:'《个体崛起》读后感'},
+    {t:'大学突围', a:'老王', link:'《大学突围》读后感'},
+    {t:'幸福的勇气', a:'岸见一郎 / 古贺史健', link:'读完《幸福的勇气》：所谓爱，其实是一场"不死不休"的冒险'},
+    {t:'被讨厌的勇气', a:'岸见一郎 / 古贺史健'},
+    {t:'智人之上', a:'尤瓦尔·赫拉利', link:'《智人之上》：当机器开始拥有"自我"，人类的退路在哪里？'},
+    {t:'人类简史', a:'尤瓦尔·赫拉利'},
+    {t:'未来简史', a:'尤瓦尔·赫拉利'},
+    {t:'黑天鹅', a:'纳西姆·塔勒布'}
+  ];
+
   var PRINCIPLE_CATS = [
     {name:'认知工具', count:31, picks:[
       {t:'逆向排除法', d:'不追正确答案，先看清所有能看见的错误选项——排除完剩下的，就是方向。'},
@@ -2244,6 +2267,18 @@
   document.getElementById('home-articles').innerHTML = recentTitles.map(function(t,i){
     var idx = ALL_ROWS.findIndex(function(r){ return r.title === t; });
     return '<div class="glass card" onclick="openArticleByIndex('+idx+')"><div class="idx">0'+(i+1)+'</div><h3>'+t+'</h3></div>';
+  }).join('');
+
+  // 首页：书架
+  var spineTones = ['linear-gradient(180deg,var(--i1),var(--i3))','linear-gradient(180deg,var(--i2),var(--i4))','linear-gradient(180deg,var(--i3),var(--i1))','linear-gradient(180deg,var(--i4),var(--i2))'];
+  document.getElementById('bookshelf').innerHTML = BOOKSHELF.map(function(b,i){
+    var idx = b.link ? ALL_ROWS.findIndex(function(r){ return r.title === b.link; }) : -1;
+    var clickAttr = idx>=0 ? ' onclick="openArticleByIndex('+idx+')" style="cursor:pointer;background:'+spineTones[i%4]+'"' : ' style="background:'+spineTones[i%4]+'"';
+    return '<div class="spine"'+clickAttr+'>'+
+      (b.reading ? '<span class="spine-tag">在读</span>' : '')+
+      '<span class="spine-t">'+b.t+'</span>'+
+      (b.a ? '<span class="spine-a">'+b.a+'</span>' : '')+
+    '</div>';
   }).join('');
 
   // 静论页：合集卡片
