@@ -2171,11 +2171,19 @@
     var row = ALL_ROWS[idx];
     if(!row) return;
     var meta = ARTICLES_WITH_BODY[row.title];
+    var tocItems = [];
     var body = meta ? meta.body.map(function(p){
-      if(p.indexOf('##')===0) return '<h3 class="art-subhead">'+p.slice(2)+'</h3>';
+      if(p.indexOf('##')===0){
+        var tid = 'toc-'+tocItems.length;
+        tocItems.push({id: tid, t: p.slice(2)});
+        return '<h3 class="art-subhead" id="'+tid+'">'+p.slice(2)+'</h3>';
+      }
       if(p.indexOf('>>')===0) return '<div class="art-pullquote">'+p.slice(2)+'</div>';
       return '<p>'+p+'</p>';
     }).join('') : '<p style="color:var(--sub)">内容整理中，稍后补上正文。</p>';
+    var tocHtml = tocItems.length ? '<nav class="art-toc" id="artToc">'+
+      tocItems.map(function(h,hi){ return '<a href="#'+h.id+'" class="art-toc-item'+(hi===0?' on':'')+'" data-toc="'+h.id+'" onclick="event.preventDefault();document.getElementById(\''+h.id+'\').scrollIntoView({behavior:\'smooth\',block:\'start\'});">'+h.t+'</a>'; }).join('')+
+      '</nav>' : '';
 
     // 同合集里找上一篇/下一篇
     var sameColl = ALL_ROWS.map(function(r,i){return {r:r,i:i};}).filter(function(x){return x.r.key===row.key;});
@@ -2205,9 +2213,11 @@
       '<div class="art-body">'+body+'</div>'+
       relatedHtml +
       navHtml +
-      '<div class="glass" style="text-align:center;padding:24px;margin-top:30px;max-width:180px"><img src="images/qrcode.jpg" alt="静论公众号二维码" style="width:110px;height:110px;border-radius:12px"/><p style="font-size:11px;color:var(--sub);margin-top:10px">扫码关注「静论」</p></div>';
+      '<div class="glass" style="text-align:center;padding:24px;margin-top:30px;max-width:180px"><img src="images/qrcode.jpg" alt="静论公众号二维码" style="width:110px;height:110px;border-radius:12px"/><p style="font-size:11px;color:var(--sub);margin-top:10px">扫码关注「静论」</p></div>'+
+      tocHtml;
     showView('article');
     setupReadProgress();
+    setupTocSpy(tocItems);
     try{ history.replaceState(null, '', '#a'+idx); }catch(e){}
   };
 
@@ -2218,6 +2228,22 @@
       var h = document.documentElement.scrollHeight - window.innerHeight;
       var pct = h>0 ? Math.min(100, Math.round(window.scrollY/h*100)) : 0;
       fill.style.width = pct+'%';
+    }
+    window.addEventListener('scroll', update);
+    update();
+  }
+  function setupTocSpy(tocItems){
+    var toc = document.getElementById('artToc');
+    if(!toc || !tocItems.length) return;
+    var headEls = tocItems.map(function(h){ return document.getElementById(h.id); });
+    var links = toc.querySelectorAll('.art-toc-item');
+    function update(){
+      var pos = window.scrollY + 120;
+      var activeI = 0;
+      for(var i=0;i<headEls.length;i++){
+        if(headEls[i] && headEls[i].offsetTop <= pos) activeI = i;
+      }
+      links.forEach(function(l,li){ l.classList.toggle('on', li===activeI); });
     }
     window.addEventListener('scroll', update);
     update();
