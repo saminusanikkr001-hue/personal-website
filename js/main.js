@@ -2497,7 +2497,7 @@
   // 现状页：来自任务系统导出快照（2026-07-07）
   var STATUS_LABELS = [
     {l:'在读', v:'The Almanack of Naval Ravikant · Choosing to Grow Yourself'},
-    {l:'静论写作', v:recentTitles[0], tag:'最新更新'}
+    {l:'静论写作', v:recentTitles[0], tag:'最新更新', articleTitle:recentTitles[0]}
   ];
   var SHOW_PROGRESS = {
     title:'老友记 Friends', season:2, episode:1,
@@ -2524,7 +2524,13 @@
   document.getElementById('status-labels').innerHTML = STATUS_LABELS.map(function(s,i){
     var tops=['linear-gradient(90deg,var(--i1),var(--i3))','linear-gradient(90deg,var(--i2),var(--i4))','linear-gradient(90deg,var(--i3),var(--i1))','linear-gradient(90deg,var(--i4),var(--i2))'];
     var tagHtml = s.tag ? '<span class="st-tag">'+s.tag+'</span>' : '';
-    return '<div class="glass status-card" style="--acc:'+tops[i%4]+'"><span class="st-l">'+s.l+tagHtml+'</span><span class="st-v">'+s.v+'</span></div>';
+    var clickAttr = '';
+    if(s.articleTitle){
+      var artIdx = ALL_ROWS.findIndex(function(r){ return r.title === s.articleTitle; });
+      if(artIdx >= 0) clickAttr = ' style="--acc:'+tops[i%4]+';cursor:pointer" onclick="openArticleByIndex('+artIdx+')"';
+    }
+    if(!clickAttr) clickAttr = ' style="--acc:'+tops[i%4]+'"';
+    return '<div class="glass status-card"'+clickAttr+'><span class="st-l">'+s.l+tagHtml+'</span><span class="st-v">'+s.v+'</span></div>';
   }).join('');
   document.getElementById('status-bars').innerHTML = STATUS_BARS.map(function(s){
     var pct = s.total ? Math.round(s.done/s.total*100) : 0;
