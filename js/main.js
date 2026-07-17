@@ -2496,7 +2496,7 @@
 
   // 现状页：来自任务系统导出快照（2026-07-07）
   var STATUS_LABELS = [
-    {l:'在读', v:'The Almanack of Naval Ravikant · Ch.5'},
+    {l:'在读', v:'The Almanack of Naval Ravikant · Choosing to Grow Yourself'},
     {l:'静论写作', v:recentTitles[0], tag:'最新更新'}
   ];
   var SHOW_PROGRESS = {
