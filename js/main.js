@@ -2497,14 +2497,14 @@
   // 现状页：来自任务系统导出快照（2026-07-07）
   var STATUS_LABELS = [
     {l:'在读', v:'The Almanack of Naval Ravikant · Ch.5'},
-    {l:'静论写作', v:'持续更新中'}
+    {l:'静论写作', v:'刚需，从来不是天生的'}
   ];
   var SHOW_PROGRESS = {
     title:'老友记 Friends', season:2, episode:1,
     seasons:[24,24,25,24,24,25,24,24,24,18]
   };
   var BADGES = [
-    {ic:'🖋️', t:'静论创办人', s:'74篇原创文章'},
+    {ic:'🖋️', t:'静论创办人', s:'75篇原创文章'},
     {ic:'📰', t:'母校转载', s:'文章登上官方公众号'},
     {ic:'📚', t:'大学生编辑部', s:'正式成员'},
     {ic:'💌', t:'《致班任》', s:'走进4个原创圈层'},
@@ -2520,7 +2520,7 @@
     {l:'英语四级', done:71, total:71}
   ];
   var statSyncEl = document.getElementById('status-sync-time');
-  if(statSyncEl) statSyncEl.textContent = '数据同步于 2026-07-08（手动，非实时）· 期末已结束，四门课程全部完成';
+  if(statSyncEl) statSyncEl.textContent = '数据同步于 2026-07-17（手动，非实时）· 期末已结束，四门课程全部完成';
   document.getElementById('status-labels').innerHTML = STATUS_LABELS.map(function(s,i){
     var tops=['linear-gradient(90deg,var(--i1),var(--i3))','linear-gradient(90deg,var(--i2),var(--i4))','linear-gradient(90deg,var(--i3),var(--i1))','linear-gradient(90deg,var(--i4),var(--i2))'];
     return '<div class="glass status-card" style="--acc:'+tops[i%4]+'"><span class="st-l">'+s.l+'</span><span class="st-v">'+s.v+'</span></div>';
