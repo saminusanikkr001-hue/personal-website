@@ -2411,7 +2411,7 @@
   };
 
   // 首页：最近几篇（取自清醒纪最新3篇）
-  var recentTitles = ['刚需，从来不是天生的','所谓命运，不过是价值观的自动化结算','什么决定你的自我驱动力'];
+  var recentTitles = ['避险，从来不是不敢做','刚需，从来不是天生的','所谓命运，不过是价值观的自动化结算'];
   document.getElementById('home-articles').innerHTML = recentTitles.map(function(t,i){
     var idx = ALL_ROWS.findIndex(function(r){ return r.title === t; });
     return '<div class="glass card" onclick="openArticleByIndex('+idx+')"><div class="idx">0'+(i+1)+'</div><h3>'+t+'</h3></div>';
