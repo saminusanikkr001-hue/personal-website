@@ -2153,7 +2153,10 @@
       colorWhy:'琥珀，透明、暖、封着过去，但还在发光。像整理好旧的，然后点一把新火。'},
     {m:'2026-06', h:90, theme:'布局', color:'#2e5fa3', colorName:'水蓝', s:'毕业季，月报/投资/消费三套系统相隔十天独立建立，原则库从82条长到135条',
       why:'盛放之后，六月没有继续燃，而是停下来把棋子放到位——三套系统相隔十天独立建成，没有一套立刻见效，是先放好，然后等它生长。',
-      colorWhy:'水蓝，蓝图的蓝，不是大海也不是天空，是建筑师工作台上白线打在蓝底上的那种冷静、精确、结构感。'}
+      colorWhy:'水蓝，蓝图的蓝，不是大海也不是天空，是建筑师工作台上白线打在蓝底上的那种冷静、精确、结构感。'},
+    {m:'2026-07', h:88, theme:'对焦', color:'#4a6b78', colorName:'镜青', s:'五门课十天内全部收官，网站、清醒纪、睡眠、任务、阅读五套自我系统相继建成，情绪也一起慢慢静了下来',
+      why:'上半月还在期末的高强度冲刺里，下半月开始搭各种系统、理清各种关系和想法——很多原本模糊的东西，一件一件被看清楚。月底真的去配了新眼镜，跟这个月的状态刚好对上：大部分时间都在做同一件事，把模糊的调清楚。',
+      colorWhy:'镜青，镜片的青色，冷静、透明。前几个月的暖色大多带着燃烧感或规划感，这个月不是继续加温，是让画面沉下来、看得更准，对应的自然是这种更冷、更透的颜色。'}
   ];
 
   var BOOKSHELF = [
@@ -2469,13 +2472,13 @@
     '</div>';
   }).join('');
   var JOURNEY_PHASES = [
-    {label:'启程', span:2}, {label:'立住', span:3}, {label:'起势', span:2}, {label:'燃', span:3}, {label:'落棋', span:1}
+    {label:'启程', span:2}, {label:'立住', span:3}, {label:'起势', span:2}, {label:'燃', span:3}, {label:'落棋', span:1}, {label:'对焦', span:1}
   ];
   document.getElementById('journeyPhases').innerHTML = JOURNEY_PHASES.map(function(p){
     return '<div class="jphase" style="flex:'+p.span+'">'+p.label+'</div>';
   }).join('');
   document.getElementById('journeyLine').textContent =
-    '8-9月是找柴点火，10-12月是护住这把刚点起来的火，1-2月是火开始稳定燃烧、被人看见，3-5月真正烧旺、把光给出去，6月第一次停下来，布局这把火接下来要烧向哪里。';
+    '8-9月是找柴点火，10-12月是护住这把刚点起来的火，1-2月是火开始稳定燃烧、被人看见，3-5月真正烧旺、把光给出去，6月第一次停下来布局这把火接下来要烧向哪里，7月开始把每一颗棋子看清楚——它为什么在那，会不会挪。';
 
   // 月报页
   document.getElementById('yuebao-list').innerHTML = YUEBAO_MONTHS.map(function(m,idx){
