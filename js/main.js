@@ -2156,7 +2156,10 @@
       colorWhy:'水蓝，蓝图的蓝，不是大海也不是天空，是建筑师工作台上白线打在蓝底上的那种冷静、精确、结构感。'},
     {m:'2026-07', h:88, theme:'对焦', color:'#4a6b78', colorName:'镜青', s:'五门课十天内全部收官，网站、清醒纪、睡眠、任务、阅读五套自我系统相继建成，情绪也一起慢慢静了下来',
       why:'上半月还在期末的高强度冲刺里，下半月开始搭各种系统、理清各种关系和想法——很多原本模糊的东西，一件一件被看清楚。月底真的去配了新眼镜，跟这个月的状态刚好对上：大部分时间都在做同一件事，把模糊的调清楚。',
-      colorWhy:'镜青，镜片的青色，冷静、透明。前几个月的暖色大多带着燃烧感或规划感，这个月不是继续加温，是让画面沉下来、看得更准，对应的自然是这种更冷、更透的颜色。'}
+      colorWhy:'镜青，镜片的青色，冷静、透明。前几个月的暖色大多带着燃烧感或规划感，这个月不是继续加温，是让画面沉下来、看得更准，对应的自然是这种更冷、更透的颜色。'},
+    {m:'2026-08', h:96, theme:'落地', color:'#78906a', colorName:'麦芽绿', url:'yuebao/2026-08.html', s:'心意成为实物，直播变成运行规范，暑假任务完成交付，四级结果接入六级项目并正式开始背词',
+      why:'七月把模糊的事情调清楚，八月则把看清的东西放进现实：承诺成为陶瓷花与满天星，照片成为纪念卡，要求成为系统，方法成为任务入口，六级计划也有了真实的第一天。',
+      colorWhy:'麦芽绿不是收割后的成熟金色，而是种子落土、开始冒芽的颜色。八月做成的许多事还不是终点，却都已经从想法进入了可以继续生长的现实。'}
   ];
 
   var BOOKSHELF = [
@@ -2472,13 +2475,13 @@
     '</div>';
   }).join('');
   var JOURNEY_PHASES = [
-    {label:'启程', span:2}, {label:'立住', span:3}, {label:'起势', span:2}, {label:'燃', span:3}, {label:'落棋', span:1}, {label:'对焦', span:1}
+    {label:'启程', span:2}, {label:'立住', span:3}, {label:'起势', span:2}, {label:'燃', span:3}, {label:'落棋', span:1}, {label:'对焦', span:1}, {label:'落地', span:1}
   ];
   document.getElementById('journeyPhases').innerHTML = JOURNEY_PHASES.map(function(p){
     return '<div class="jphase" style="flex:'+p.span+'">'+p.label+'</div>';
   }).join('');
   document.getElementById('journeyLine').textContent =
-    '8-9月是找柴点火，10-12月是护住这把刚点起来的火，1-2月是火开始稳定燃烧、被人看见，3-5月真正烧旺、把光给出去，6月第一次停下来布局这把火接下来要烧向哪里，7月开始把每一颗棋子看清楚——它为什么在那，会不会挪。';
+    '8-9月是找柴点火，10-12月是护住这把刚点起来的火，1-2月是火开始稳定燃烧、被人看见，3-5月真正烧旺、把光给出去，6月第一次停下来布局这把火接下来要烧向哪里，7月把每一颗棋子看清楚，8月则让看清的判断、心意和计划真正落到现实。';
 
   // 月报页
   document.getElementById('yuebao-list').innerHTML = YUEBAO_MONTHS.map(function(m,idx){
@@ -2514,6 +2517,7 @@
         '<p><b>这个月做了什么：</b>'+m.s+'</p>'+
         '<p><b>为什么是这个关键词：</b>'+m.why+'</p>'+
         '<p><b>为什么是这个颜色：</b>'+m.colorWhy+'</p>'+
+        (m.url ? '<p><a class="tl-link" href="'+m.url+'" target="_blank" rel="noopener">打开本月分享版月报 →</a></p>' : '')+
       '</div>'+
       navHtml;
     showView('yuebao-detail');
