@@ -2481,7 +2481,7 @@
     return '<div class="jphase" style="flex:'+p.span+'">'+p.label+'</div>';
   }).join('');
   document.getElementById('journeyLine').textContent =
-    '8-9月是找柴点火，10-12月是护住这把刚点起来的火，1-2月是火开始稳定燃烧、被人看见，3-5月真正烧旺、把光给出去，6月第一次停下来布局这把火接下来要烧向哪里，7月把每一颗棋子看清楚，8月则让看清的判断、心意和计划真正落到现实。';
+    '2025年8月—9月是找柴点火，2025年10月—12月是护住这把刚点起来的火，2026年1月—2月是火开始稳定燃烧、被人看见，2026年3月—5月真正烧旺、把光给出去，2026年6月第一次停下来布局这把火接下来要烧向哪里，2026年7月把每一颗棋子看清楚，2026年8月则让看清的判断、心意和计划真正落到现实。';
 
   // 月报页
   document.getElementById('yuebao-list').innerHTML = YUEBAO_MONTHS.map(function(m,idx){
